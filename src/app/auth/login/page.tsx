@@ -1,71 +1,61 @@
 'use client';
 
-import { Discord, Email } from '@/components/icons/icons';
-import { AuthButton } from '@/components/ui/AuthButton';
-import { AuthLink } from '@/components/ui/AuthLink';
-import { TextField } from '@/components/ui/TextField';
-import { useForm } from '@/hooks/useForm';
-import { FormEvent } from 'react';
+import { Discord, Email } from '@/components/icons';
+import { AuthButton, AuthLink, TextField } from '@/components/ui';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
 const Login = () => {
-	const { formValues, handleChange,reset } = useForm({
-		email: '',
-		password: '',
-	});
+	const { register, handleSubmit } = useForm();
 
-	const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		console.log(formValues);
-		reset();
-	};
+	const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
 
 	return (
-		<form
-			onSubmit={handleSubmit}
-			className='w-[90%] min-[480px]:w-96 min-h-96 flex flex-col items-center gap-6 text-[#20315C] bg-white py-8 px-4 bg-opacity-50 rounded-md backdrop-blur-sm'>
-			<legend className='text-4xl font-bold'>Sorteo Login</legend>
+		<section className='w-full h-full flex items-center justify-center'>
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className='w-[90%] min-[480px]:w-96 min-h-96 flex flex-col items-center gap-4 text-[#20315C] bg-white pt-14 pb-4 px-4 bg-opacity-50 rounded-md backdrop-blur-sm'>
+				<legend className='text-4xl font-bold relative'>Login</legend>
 
-			<div className='flex flex-col gap-4 w-full'>
-				<TextField
-					value={formValues.email}
-					name='email'
-					type='email'
-					labelText='Correo'
-					onInputChange={handleChange}
-					placeholder='example@gmail.com'
-				/>
+				<div className='flex flex-col gap-2 w-full'>
+					<TextField
+						name='email'
+						type='email'
+						labelText='Correo'
+						register={register}
+						placeholder='example@gmail.com'
+					/>
 
-				<TextField
-					value={formValues.password}
-					type='password'
-					name='password'
-					onInputChange={handleChange}
-					labelText='contraseña'
-					placeholder='contraseña'
-				/>
+					<TextField
+						type='password'
+						name='password'
+						labelText='contraseña'
+						register={register}
+						placeholder='******'
+					/>
 
-				<AuthLink
-					route='/auth/register'
-					text='¿No tienes cuenta? registrate'
-				/>
-			</div>
+					<AuthLink
+						route='/auth/register'
+						text='¿No tienes cuenta? Registrate'
+					/>
+				</div>
 
-			<div className='w-full flex flex-col items-center gap-2'>
-				<AuthButton
-					type='submit'
-					moreclass='text-white bg-gradient-to-r from-[#20315C] to-[#264085]'>
-					<Email /> Ingresar por correo
-				</AuthButton>
+				<div className='w-full flex flex-col items-center gap-2'>
+					<AuthButton
+						type='submit'
+						moreclass='text-white bg-gradient-to-r from-[#20315C] to-[#264085]'>
+						<Email /> Ingresar por correo
+					</AuthButton>
 
-				<span className='text-xl'>ó</span>
+					<span className='text-xl'>ó</span>
 
-				<AuthButton
-					type='button'
-					moreclass='text-white bg-gradient-to-r from-[#2E3038] to-[#333436]'>
-					<Discord /> Ingresar por discord
-				</AuthButton>
-			</div>
-		</form>
+					<AuthButton
+						type='button'
+						moreclass='text-white bg-gradient-to-b from-[#2E3038] to-[#131E3A]'>
+						<Discord /> Ingresar por discord
+					</AuthButton>
+				</div>
+			</form>
+		</section>
 	);
 };
 

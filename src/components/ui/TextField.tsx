@@ -1,24 +1,23 @@
 import { firtsLetterUppercase } from '@/lib/utils';
-import { ChangeEvent } from 'react';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 type TypeInput = 'text' | 'password' | 'email';
 
 interface Props {
 	name: string;
 	type: TypeInput;
-	value: string;
-	placeholder: string;
 	labelText: string;
-	onInputChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+	placeholder: string;
+
+	register: UseFormRegister<FieldValues>;
 }
 
 export const TextField = ({
 	name,
 	type,
-	value,
+	register,
 	labelText,
 	placeholder,
-	onInputChange,
 }: Props) => {
 	return (
 		<div className={`flex flex-col gap-2`}>
@@ -29,11 +28,9 @@ export const TextField = ({
 			</label>
 			<input
 				type={type}
-				name={name}
-				value={value}
-				onChange={onInputChange}
+				{...register(name)}
 				placeholder={placeholder}
-				className='text-black bg-transparent placeholder:text-[#3C3C3C] border-2 border-t-0 border-r-0 p-2 outline-none'
+				className='text-black bg-transparent placeholder:text-[#3C3C3C] border-[1.5px] border-t-0 border-r-0 p-2 outline-none'
 			/>
 		</div>
 	);

@@ -7,7 +7,7 @@ interface Props {
 
 export const AuthLink = ({ text, route }: Props) => {
 	return (
-		<div className='bg-opacity-50 bg-gray-300 p-2'>
+		<div className='bg-opacity-30 bg-gray-100 p-2 rounded-md'>
 			<p className='text-center'>
 				{text} {''}
 				<Link

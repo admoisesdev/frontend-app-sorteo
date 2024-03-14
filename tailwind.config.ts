@@ -72,9 +72,11 @@ const config = {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 			},
-      backgroundImage:{
-        'hero-img': 'url(/Login.png)'
-      }
+			backgroundImage: {
+				'hero-img': 'url(/Login.png)',
+				'hero-home': 'url(/home.png)',
+				'hero-admin': 'url(/admin.png)',
+			},
 		},
 	},
 	plugins: [require('tailwindcss-animate')],

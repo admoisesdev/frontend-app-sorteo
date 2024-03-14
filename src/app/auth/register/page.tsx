@@ -1,69 +1,57 @@
 'use client';
-import { AuthButton } from '@/components/ui/AuthButton';
-import { AuthLink } from '@/components/ui/AuthLink';
-import { TextField } from '@/components/ui/TextField';
-import { useForm } from '@/hooks/useForm';
-import { FormEvent } from 'react';
+import { AuthButton, AuthLink, TextField } from '@/components/ui';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
 const Register = () => {
-	const { formValues, handleChange, reset } = useForm({
-		name: '',
-		email: '',
-		password: '',
-	});
+	const { register, handleSubmit } = useForm();
 
-	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		console.log(formValues);
-		reset();
-	};
+	const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
 
 	return (
-		<form
-			onSubmit={handleSubmit}
-			className='w-[90%] min-[480px]:w-96 min-h-96 flex flex-col items-center gap-6 text-[#20315C] bg-white py-8 px-4 bg-opacity-50 rounded-md backdrop-blur-sm'>
-			<legend className='text-4xl font-bold'>Sorteo Register</legend>
+		<section className='w-full h-full flex items-center justify-center'>
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className='w-[90%] min-[480px]:w-96 min-h-96 flex flex-col items-center gap-6 text-[#20315C] bg-white pt-14 pb-4 px-4 bg-opacity-50 rounded-md backdrop-blur-sm'>
+				<legend className='text-4xl font-bold'>Register</legend>
 
-			<div className='flex flex-col gap-4 w-full'>
-				<TextField
-					value={formValues.name}
-					name='name'
-					type='text'
-					labelText='Nombre'
-					placeholder='Juan Perez'
-					onInputChange={handleChange}
-				/>
+				<div className='flex flex-col gap-4 w-full'>
+					<TextField
+						name='name'
+						type='text'
+						labelText='nombre'
+						register={register}
+						placeholder='Juan Perez'
+					/>
 
-				<TextField
-					value={formValues.email}
-					name='email'
-					type='email'
-					labelText='Correo'
-					onInputChange={handleChange}
-					placeholder='example@gmail.com'
-				/>
+					<TextField
+						name='email'
+						type='email'
+						labelText='correo'
+						register={register}
+						placeholder='example@gmail.com'
+					/>
 
-				<TextField
-					value={formValues.password}
-					type='password'
-					name='password'
-					labelText='contraseña'
-					placeholder='contraseña'
-					onInputChange={handleChange}
-				/>
+					<TextField
+						type='password'
+						name='password'
+						labelText='contraseña'
+						register={register}
+						placeholder='*******'
+					/>
 
-				<AuthLink
-					route='/auth/login'
-					text='¿Ya tienes cuenta? ingresa'
-				/>
-			</div>
+					<AuthLink
+						route='/auth/login'
+						text='¿Ya tienes cuenta? Ingresa'
+					/>
+				</div>
 
-			<AuthButton
-				type='submit'
-				moreclass='text-white bg-gradient-to-r from-[#20315C] to-[#264085]'>
-				Registrarse
-			</AuthButton>
-		</form>
+				<AuthButton
+					type='submit'
+					moreclass='text-white bg-gradient-to-r from-[#20315C] to-[#264085]'>
+					Registrarse
+				</AuthButton>
+			</form>
+		</section>
 	);
 };
 
