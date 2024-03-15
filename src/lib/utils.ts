@@ -13,14 +13,14 @@ export const firtsLetterUppercase = (text: string): string => {
 //Fetching
 
 export const loginAuth = async (user: LoginUser) => {
-	console.log(user);
-
 	try {
 		const res = await helpHttp({
 			url: '/auth/login',
 			method: 'POST',
 			data: user,
 		});
+
+		console.log(res.data);
 
 		return res.data;
 	} catch (error: any) {
@@ -42,4 +42,8 @@ export const registerAuth = async (user: RegisterUser) => {
 	} catch (error) {
 		console.log(error);
 	}
+};
+
+export const participeInTheDraw = async () => {
+	//TODO: REGISTRAR USUARIO EN EL SORTEO
 };

@@ -12,7 +12,7 @@ export default function Home() {
 						<div className='flex items-center gap-4 text-white text-lg'>
 							<Link
 								href='/auth/login'
-								className='px-4 py-1 bg-[#3565E1] rounded-md border-[2px] border-transparent'>
+								className='px-4 py-1 bg-blue-app-400 rounded-md border-[2px] border-transparent'>
 								Login
 							</Link>
 
@@ -35,7 +35,7 @@ export default function Home() {
 						/>
 						<Link
 							href='/auth/login'
-							className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-[#28335E] rounded-lg text-white p-2 text-4xl'>
+							className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-blue-app-800 rounded-lg text-white p-2 text-4xl'>
 							Participar
 						</Link>
 					</div>

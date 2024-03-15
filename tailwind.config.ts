@@ -20,6 +20,18 @@ const config = {
 		extend: {
 			colors: {
 				border: 'hsl(var(--border))',
+				/*<=====COLORS APP ======>*/
+				'blue-dark-app-900': '#131E3A',
+				'blue-app-800': '#20315C',
+				'blue-app-700': '#28335E',
+				'blue-app-600': '#264085',
+				'blue-app-400': '#3565E1',
+				'blue-dark-app-200': '#2E3038',
+				'purple-app-400': '#6A1ECD',
+				'purple-app-600': '#9747FF',
+				'yellow-app-400': '#FFCC69',
+
+				/*<=====END COLORS APP ======>*/
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
@@ -76,6 +88,7 @@ const config = {
 				'hero-img': 'url(/Login.png)',
 				'hero-home': 'url(/home.png)',
 				'hero-admin': 'url(/admin.png)',
+				'hero-sorteos': 'url(/hero-2.png)'
 			},
 		},
 	},

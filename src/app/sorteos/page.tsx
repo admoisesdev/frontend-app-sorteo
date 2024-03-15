@@ -18,11 +18,11 @@ const Sorteos = () => {
 					<h1 className='text-2xl uppercase text-white font-bold'>SORTEO</h1>
 
 					<div
-						className='bg-[#6A1ECD] relative w-[10rem] h-[3rem] border-l-transparent before:content-[""] before:absolute before:w-0 before:h-0 before:border-t-[1.5rem] before:border-t-transparent before:border-b-[1.5rem] before:border-b-transparent  before:border-r-[2rem] before:border-r-[#6A1ECD] before:left-[-2rem] pl-5 flex items-center gap-2 text-white shadow-md cursor-pointer'
+						className='bg-purple-app-400 relative w-[10rem] h-[3rem] border-l-transparent before:content-[""] before:absolute before:w-0 before:h-0 before:border-t-[1.5rem] before:border-t-transparent before:border-b-[1.5rem] before:border-b-transparent  before:border-r-[2rem] before:border-r-purple-app-400 before:left-[-2rem] pl-5 flex items-center gap-2 text-white shadow-md cursor-pointer'
 						onClick={() => setOpenMenu(!openMenu)}>
 						<span>Dimitry</span> {openMenu ? <ArrowBotton /> : <ArrowRight />}
 						<ul
-							className={`absolute bg-[#6A1ECD] w-[8rem] h-[3rem] top-[3rem] right-0 rounded-t-none transition-all duration-200 rounded-md ${
+							className={`absolute bg-purple-app-400 w-[8rem] h-[3rem] top-[3rem] right-0 rounded-t-none transition-all duration-200 rounded-md ${
 								openMenu
 									? 'opacity-100 visible translate-y-0'
 									: 'opacity-0 invisible translate-y-10'
@@ -52,7 +52,7 @@ const Sorteos = () => {
 						/>
 						<Link
 							href=''
-							className='py-2 px-4 mt-2 bg-[#FFCC69] rounded-full text-black text-lg'>
+							className='py-2 px-4 mt-2 bg-backgroundBtn4 rounded-full text-black text-lg'>
 							Crear Sorteos
 						</Link>
 					</CardOption>
@@ -68,27 +68,10 @@ const Sorteos = () => {
 
 						<Link
 							href=''
-							className='py-2 px-4 bg-[#9747FF] text-white rounded-full text-lg'>
+							className='py-2 px-4 bg-backgroundBtn5 text-white rounded-full text-lg'>
 							Ver Sorteos
 						</Link>
 					</CardOption>
-
-					{/*
-							<CardOption>
-						<h2 className='text-white text-xl'>Participantes</h2>
-						<Image
-							src='/card-3.png'
-							alt='card'
-							width={150}
-							height={150}
-						/>
-						<Link
-							href=''
-							className='py-2 px-4 bg-[#9747FF] text-white rounded-full text-lg'>
-							Ver Participantes
-						</Link>
-					</CardOption>
-						*/}
 				</section>
 			</main>
 		</div>

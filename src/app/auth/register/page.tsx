@@ -5,13 +5,33 @@ import { AuthButton, AuthLink, TextField } from '@/components/ui';
 import { useTanStack } from '@/hooks/useTanStack';
 
 const Register = () => {
-	const { register, handleSubmit, reset } = useForm();
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors },
+		setError,
+	} = useForm();
 
 	const { registerMutation } = useTanStack();
 
+	const startRegister = async ({ email, password, name }: RegisterUser) => {
+		try {
+			await registerMutation.mutateAsync({ email, password, name });
+			reset();
+		} catch (error) {
+			setError('email', { message: 'Error de inicio de sesión' });
+			setError('password', { message: 'Error de inicio de sesión' });
+		}
+	};
+
 	const onSubmit: SubmitHandler<FieldValues> = (data) => {
 		const { name, email, password } = data;
-		registerMutation.mutate({ email, password, name });
+
+		if (Object.keys(errors).length > 0) return;
+
+		startRegister({ name, email, password });
+
 		reset();
 	};
 
@@ -30,6 +50,14 @@ const Register = () => {
 						type='text'
 						labelText='nombre'
 						register={register}
+						validacion={{
+							required: 'Este campo es requerido',
+							minLength: {
+								value: 1,
+								message: 'nombre debe tener al menos 1 caracter',
+							},
+						}}
+						messageError={errors.name ? `${errors.name.message}` : ''}
 						placeholder='Juan Perez'
 					/>
 
@@ -38,7 +66,15 @@ const Register = () => {
 						type='email'
 						labelText='correo'
 						register={register}
+						validacion={{
+							required: 'Este campo es requerido',
+							pattern: {
+								value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+								message: 'Email invalido',
+							},
+						}}
 						placeholder='example@gmail.com'
+						messageError={errors.email ? `${errors.email.message}` : ''}
 					/>
 
 					<TextField
@@ -46,6 +82,14 @@ const Register = () => {
 						name='password'
 						labelText='contraseña'
 						register={register}
+						validacion={{
+							required: 'Este campo es requerido',
+							minLength: {
+								value: 6,
+								message: 'contraseña debe tener más de 6 caracteres',
+							},
+						}}
+						messageError={errors.password ? `${errors.password.message}` : ''}
 						placeholder='*******'
 					/>
 
@@ -57,7 +101,7 @@ const Register = () => {
 
 				<AuthButton
 					type='submit'
-					moreclass='text-white bg-gradient-to-r from-[#20315C] to-[#264085]'>
+					moreclass='text-white bg-gradient-to-r from-blue-app-800 to-blue-app-600'>
 					Registrarse
 				</AuthButton>
 			</form>

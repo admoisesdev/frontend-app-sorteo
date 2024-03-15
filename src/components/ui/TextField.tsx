@@ -11,7 +11,6 @@ interface Props {
 	placeholder: string;
 	messageError: string;
 	register: UseFormRegister<FieldValues>;
-	onChange: (name: string) => void;
 }
 
 export const TextField = ({
@@ -22,7 +21,6 @@ export const TextField = ({
 	validacion,
 	messageError,
 	placeholder,
-	onChange,
 }: Props) => {
 	return (
 		<div className={`flex flex-col gap-2`}>
@@ -35,7 +33,6 @@ export const TextField = ({
 				type={type}
 				placeholder={placeholder}
 				{...register(name, validacion)}
-				onChange={() => onChange(name)}
 				className={`text-black bg-transparent placeholder:text-[#3C3C3C] border-[1.5px] border-t-0 border-r-0 p-2 outline-none ${
 					messageError !== '' ? 'border-red-500' : 'border-white'
 				}`}

@@ -8,32 +8,42 @@ import { useTanStack } from '@/hooks/useTanStack';
 const Login = () => {
 	const {
 		register,
-		trigger,
 		handleSubmit,
+		reset,
+		setError,
 		formState: { errors },
 	} = useForm();
 	const { loginMutation } = useTanStack();
 
-	const onSubmit: SubmitHandler<FieldValues> = (data) => {
+	const startLogin = async ({ email, password }: LoginUser) => {
+		try {
+			const userData = await loginMutation.mutateAsync({ email, password });
+
+			localStorage.setItem('__usertoken__', userData.token);
+
+			reset();
+		} catch (error) {
+			setError('email', { message: 'Error de inicio de sesión' });
+			setError('password', { message: 'Error de inicio de sesión' });
+		}
+	};
+
+	const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 		const { email, password } = data;
 
 		if (Object.keys(errors).length > 0) return;
 
-		console.log('Todo pasa correctamente');
+		startLogin({ email, password });
 
-		//loginMutation.mutate({ email, password });
-	};
-
-	const handleChange = (name: string) => {
-		trigger(name);
-		console.log(name);
+		reset();
 	};
 
 	return (
 		<section className='w-full h-full flex items-center justify-center'>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className='w-[90%] min-[480px]:w-96 min-h-96 flex flex-col items-center gap-4 text-[#20315C] bg-white py-5 lg:py-10 px-4 bg-opacity-50 rounded-md backdrop-blur-sm'>
+				autoComplete='off'
+				className='w-[90%] min-[480px]:w-96 min-h-96 flex flex-col items-center gap-4 text-blue-app-800 bg-white py-5 lg:py-10 px-4 bg-opacity-50 rounded-md backdrop-blur-sm'>
 				<legend className='text-4xl sm:text-5xl font-bold relative'>
 					Login
 				</legend>
@@ -51,7 +61,6 @@ const Login = () => {
 							},
 						}}
 						register={register}
-						onChange={handleChange}
 						placeholder='example@gmail.com'
 						messageError={errors.email ? `${errors.email.message}` : ''}
 					/>
@@ -59,7 +68,6 @@ const Login = () => {
 					<TextField
 						type='password'
 						name='password'
-						onChange={handleChange}
 						validacion={{
 							required: 'Este campo es requerido',
 							minLength: {
@@ -82,7 +90,7 @@ const Login = () => {
 				<div className='w-full flex flex-col items-center gap-2'>
 					<AuthButton
 						type='submit'
-						moreclass='text-white bg-gradient-to-r from-[#20315C] to-[#264085]'>
+						moreclass='text-white bg-gradient-to-r from-blue-app-800 to-blue-app-600'>
 						<Email /> Ingresar por correo
 					</AuthButton>
 
@@ -90,7 +98,7 @@ const Login = () => {
 
 					<AuthButton
 						type='button'
-						moreclass='text-white bg-gradient-to-b from-[#2E3038] to-[#131E3A]'>
+						moreclass='text-white bg-gradient-to-b from-blue-dark-app-200 to-blue-dark-app-900'>
 						<Discord /> Ingresar por discord
 					</AuthButton>
 				</div>
