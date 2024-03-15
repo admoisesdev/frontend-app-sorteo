@@ -9,9 +9,9 @@ interface RequestOptions {
 }
 
 export const instance = axios.create({
-	headers: {},
-	withCredentials: true,
+  withCredentials: true,
 	baseURL: 'http://localhost:3000/api',
+	headers: {},
 });
 
 export const helpHttp = async ({

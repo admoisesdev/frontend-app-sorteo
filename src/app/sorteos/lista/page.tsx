@@ -1,3 +1,5 @@
+'use client';
+
 import { TableItem } from '@/components/TableItem';
 import { TableListVacio } from '@/components/TableListVacio';
 import SorteosContainer from '@/components/ui/SorteosContainer';
@@ -8,35 +10,14 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table';
-
-interface Sorteo {
-	id: number;
-	title: string;
-	description: string;
-}
-
-const data: Sorteo[] = [
-	{
-		id: 1,
-		title: 'Sorteo ejemplo 1',
-		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio error neque enim? Unde odit quis saepe deleniti suscipit error fugiat nostrum excepturi officiis reiciendis. Veritatis amet a explicabo doloribus ducimus?',
-	},
-	{
-		id: 2,
-		title: 'Sorteo ejemplo 2',
-		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio error neque enim? Unde odit quis saepe deleniti suscipit error fugiat nostrum excepturi officiis reiciendis. Veritatis amet a explicabo doloribus ducimus?',
-	},
-	{
-		id: 3,
-		title: 'Sorteo ejemplo 3',
-		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio error neque enim? Unde odit quis saepe deleniti suscipit error fugiat nostrum excepturi officiis reiciendis. Veritatis amet a explicabo doloribus ducimus?',
-	},
-];
+import { useRaffle } from '@/hooks/useRaffle';
 
 const Lista = () => {
+	const { queryRaffles } = useRaffle();
+
+	console.log(queryRaffles.data);
+
+	const data: any = [];
 	return (
 		<SorteosContainer moreClass='bg-hero-sorteos bg-cover bg-[80%_80%]'>
 			<main className='w-full min-h-[100vh_-_10rem] flex flex-col p-4 items-center'>

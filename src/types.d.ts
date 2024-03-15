@@ -6,6 +6,24 @@ interface TableInfo {
 	description: string;
 }
 
+interface Prize {
+	name: string;
+	description: string;
+	active: boolean;
+	id: string;
+}
+
+interface Raffle {
+	name: string;
+	description: string;
+	endAt: Date;
+	active: true;
+	prize: Prize[] | Prize | string;
+	users: User[],
+	createAt: Date;
+	id: string;
+}
+
 interface User {
 	id: string;
 	name: string;
