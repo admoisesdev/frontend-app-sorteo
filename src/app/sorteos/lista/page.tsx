@@ -1,16 +1,13 @@
 import { TableItem } from '@/components/TableItem';
 import { TableListVacio } from '@/components/TableListVacio';
-import { Delete, Edit, Sad } from '@/components/icons';
 import SorteosContainer from '@/components/ui/SorteosContainer';
 import {
 	Table,
 	TableBody,
-	TableCell,
 	TableHead,
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table';
-import { cutText } from '@/lib/utils';
 
 interface Sorteo {
 	id: number;
@@ -19,8 +16,7 @@ interface Sorteo {
 }
 
 const data: Sorteo[] = [
-	/*
-		{
+	{
 		id: 1,
 		title: 'Sorteo ejemplo 1',
 		description:
@@ -38,7 +34,6 @@ const data: Sorteo[] = [
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio error neque enim? Unde odit quis saepe deleniti suscipit error fugiat nostrum excepturi officiis reiciendis. Veritatis amet a explicabo doloribus ducimus?',
 	},
-	*/
 ];
 
 const Lista = () => {

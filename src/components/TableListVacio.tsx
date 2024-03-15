@@ -1,5 +1,5 @@
-import { Sad } from './icons';
 import { TableCell, TableRow } from './ui/table';
+import { SadIcon } from './icons';
 
 export const TableListVacio = () => {
 	return (
@@ -8,7 +8,7 @@ export const TableListVacio = () => {
 				<h2 className='text-4xl md:text-6xl text-center text-[#5B5E80] font-bold'>
 					Lista de sorteos vacio
 				</h2>
-				<Sad />
+				<SadIcon />
 			</TableCell>
 		</TableRow>
 	);

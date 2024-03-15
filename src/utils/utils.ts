@@ -8,3 +8,8 @@ export function cn(...inputs: ClassValue[]) {
 export const firtsLetterUppercase = (text: string) => {
 	return text.charAt(0).toUpperCase() + text.slice(1);
 };
+
+
+export const cutText = (text:string) => {
+	return text.slice(0, 14) + "..."; 
+}

@@ -1,6 +1,7 @@
-import { cutText } from '@/lib/utils';
 import { TableCell, TableRow } from './ui/table';
 import { Delete, Edit } from './icons';
+import { cutText } from '@/utils/utils';
+
 
 export const TableItem = ({ id, title, description }: TableInfo) => {
 	return (

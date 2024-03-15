@@ -29,6 +29,7 @@ const config = {
 				'blue-dark-app-200': '#2E3038',
 				'purple-app-400': '#6A1ECD',
 				'purple-app-600': '#9747FF',
+				'blue-dark-app-500': '#353960',
 				'yellow-app-400': '#FFCC69',
 
 				/*<=====END COLORS APP ======>*/
@@ -88,7 +89,7 @@ const config = {
 				'hero-img': 'url(/Login.png)',
 				'hero-home': 'url(/home.png)',
 				'hero-admin': 'url(/admin.png)',
-				'hero-sorteos': 'url(/hero-2.png)'
+				'hero-sorteos': 'url(/hero-2.png)',
 			},
 		},
 	},
