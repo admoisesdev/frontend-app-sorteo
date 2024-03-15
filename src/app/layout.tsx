@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Kelly_Slab } from 'next/font/google';
 import TanStackProvider from '@/providers/TanStackProvider';
 import '../styles/globals.css';
+import AuthProvider from '@/context/auth/AuthProvider';
 
 const kelly = Kelly_Slab({ subsets: ['latin'], weight: ['400'] });
 
@@ -17,8 +18,12 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={kelly.className}>
-				<TanStackProvider>{children}</TanStackProvider>
+			<body className={kelly.className} suppressHydrationWarning={true}>
+        <TanStackProvider>
+          <AuthProvider>
+            {children}
+          </AuthProvider>
+        </TanStackProvider>
 			</body>
 		</html>
 	);

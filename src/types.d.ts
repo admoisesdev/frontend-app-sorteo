@@ -1,8 +1,18 @@
-interface LoginUser {
-	email: string;
-	password: string;
+type AuthError = { error: string }
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  emailValidated: boolean;
+  role: string[];
 }
 
-interface RegisterUser extends LoginUser {
-	name: string;
+interface LoginUser {
+  user: User;
+  token: string;
+}
+
+interface RegisterUser extends User {
+  password: string;
 }
