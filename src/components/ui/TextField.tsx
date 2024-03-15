@@ -7,9 +7,11 @@ interface Props {
 	name: string;
 	type: TypeInput;
 	labelText: string;
+	validacion: object;
 	placeholder: string;
-
+	messageError: string;
 	register: UseFormRegister<FieldValues>;
+	onChange: (name: string) => void;
 }
 
 export const TextField = ({
@@ -17,7 +19,10 @@ export const TextField = ({
 	type,
 	register,
 	labelText,
+	validacion,
+	messageError,
 	placeholder,
+	onChange,
 }: Props) => {
 	return (
 		<div className={`flex flex-col gap-2`}>
@@ -28,10 +33,19 @@ export const TextField = ({
 			</label>
 			<input
 				type={type}
-				{...register(name)}
 				placeholder={placeholder}
-				className='text-black bg-transparent placeholder:text-[#3C3C3C] border-[1.5px] border-t-0 border-r-0 p-2 outline-none'
+				{...register(name, validacion)}
+				onChange={() => onChange(name)}
+				className={`text-black bg-transparent placeholder:text-[#3C3C3C] border-[1.5px] border-t-0 border-r-0 p-2 outline-none ${
+					messageError !== '' ? 'border-red-500' : 'border-white'
+				}`}
 			/>
+			<span
+				className={`font-bold ${
+					messageError !== '' ? 'opacity-100 text-red-500' : 'opacity-0'
+				}`}>
+				{messageError}
+			</span>
 		</div>
 	);
 };

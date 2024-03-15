@@ -1,18 +1,28 @@
 'use client';
-import { AuthButton, AuthLink, TextField } from '@/components/ui';
+
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { AuthButton, AuthLink, TextField } from '@/components/ui';
+import { useTanStack } from '@/hooks/useTanStack';
 
 const Register = () => {
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit, reset } = useForm();
 
-	const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
+	const { registerMutation } = useTanStack();
+
+	const onSubmit: SubmitHandler<FieldValues> = (data) => {
+		const { name, email, password } = data;
+		registerMutation.mutate({ email, password, name });
+		reset();
+	};
 
 	return (
 		<section className='w-full h-full flex items-center justify-center'>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className='w-[90%] min-[480px]:w-96 min-h-96 flex flex-col items-center gap-6 text-[#20315C] bg-white pt-14 pb-4 px-4 bg-opacity-50 rounded-md backdrop-blur-sm'>
-				<legend className='text-4xl font-bold'>Register</legend>
+				className='w-[90%] min-[480px]:w-96 min-h-96 flex flex-col items-center gap-6 text-[#20315C] bg-white py-5 lg:py-10 px-4 bg-opacity-50 rounded-md backdrop-blur-sm'>
+				<legend className='text-4xl sm:text-5xl font-bold relative'>
+					Register
+				</legend>
 
 				<div className='flex flex-col gap-4 w-full'>
 					<TextField
