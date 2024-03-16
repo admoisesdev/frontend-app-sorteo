@@ -1,5 +1,5 @@
-import { TableCell, TableRow } from './ui/table';
-import { SadIcon } from './icons';
+import { TableCell, TableRow } from './table';
+import { SadIcon } from '../icons';
 
 export const TableListVacio = () => {
 	return (

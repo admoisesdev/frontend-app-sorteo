@@ -1,11 +1,14 @@
 'use client';
 
-import { TableItem } from '@/components/TableItem';
-import { TableListVacio } from '@/components/TableListVacio';
+import { TableItem } from '@/components/ui';
+import { TableListVacio } from '@/components/ui';
+import { Loader } from '@/components/ui/Loader';
 import SorteosContainer from '@/components/ui/SorteosContainer';
+import { TableHeaderRaffle } from '@/components/ui/TableHeaderRaffle';
 import {
 	Table,
 	TableBody,
+	TableCell,
 	TableHead,
 	TableHeader,
 	TableRow,
@@ -15,9 +18,6 @@ import { useRaffle } from '@/hooks/useRaffle';
 const Lista = () => {
 	const { queryRaffles } = useRaffle();
 
-	console.log(queryRaffles.data);
-
-	const data: any = [];
 	return (
 		<SorteosContainer moreClass='bg-hero-sorteos bg-cover bg-[80%_80%]'>
 			<main className='w-full min-h-[100vh_-_10rem] flex flex-col p-4 items-center'>
@@ -27,32 +27,22 @@ const Lista = () => {
 					<h2 className='text-4xl text-white'>Lista de sorteos</h2>
 
 					<Table>
-						<TableHeader>
-							<TableRow className='text-white'>
-								<TableHead className='text-sm sm:text-xl text-center'>
-									#N
-								</TableHead>
-								<TableHead className='text-sm sm:text-xl text-center'>
-									Nombre
-								</TableHead>
-								<TableHead className='text-sm sm:text-xl text-center'>
-									Premio
-								</TableHead>
-								<TableHead className='text-sm sm:text-xl text-center'>
-									Acciones
-								</TableHead>
-							</TableRow>
-						</TableHeader>
+						<TableHeaderRaffle />
 						<TableBody>
-							{data.length > 0 ? (
-								data.map((info) => (
-									<TableItem
-										key={info.id}
-										{...info}
-									/>
-								))
+							{!queryRaffles.isLoading ? (
+								(queryRaffles.data as Raffle[]).length > 0 ? (
+									(queryRaffles.data as Raffle[]).map((info: Raffle, i) => (
+										<TableItem
+											key={info.id}
+											position={i}
+											{...info}
+										/>
+									))
+								) : (
+									<TableListVacio />
+								)
 							) : (
-								<TableListVacio />
+								<Loader />
 							)}
 						</TableBody>
 					</Table>
