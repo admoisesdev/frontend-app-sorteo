@@ -1,16 +1,20 @@
 import { useRouter } from "next/navigation";
 
-import { useState } from 'react';
-import useAuth from '@/hooks/useAuth';
+import { useState } from "react";
+import useAuth from "@/hooks/useAuth";
 
-import { ArrowBotton, ArrowRight, Logout } from '@/components/icons';
+import { ArrowBotton, ArrowRight, Logout } from "@/components/icons";
 
 const initialOpenMenu = false;
 
-export const LogoutButton = () => {
+interface AppProps {
+  pathLogout?: string;
+}
+
+export const LogoutButton = ({ pathLogout = "/" }: AppProps) => {
   const router = useRouter();
   const [openMenu, setOpenMenu] = useState(initialOpenMenu);
-  const { logout,user } = useAuth();
+  const { logout, user } = useAuth();
   return (
     <div
       className='bg-purple-app-400 relative w-[10rem] h-[3rem] border-l-transparent before:content-[""] before:absolute before:w-0 before:h-0 before:border-t-[1.5rem] before:border-t-transparent before:border-b-[1.5rem] before:border-b-transparent  before:border-r-[2rem] before:border-r-purple-app-400 before:left-[-2rem] pl-5 flex items-center gap-2 text-white shadow-md cursor-pointer'
@@ -30,7 +34,7 @@ export const LogoutButton = () => {
             className="w-full h-full text-sm flex items-center gap-2"
             onClick={() => {
               logout();
-              router.push("/");
+              router.push(pathLogout);
             }}
           >
             <Logout />
@@ -40,4 +44,4 @@ export const LogoutButton = () => {
       </ul>
     </div>
   );
-}
+};

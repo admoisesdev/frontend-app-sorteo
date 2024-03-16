@@ -1,13 +1,5 @@
 'use client';
 
-//Peticiones
-
-//TODO: getRaffles
-//TODO: getRaffle(id)
-//TODO: createRaffle(raffle)
-//TODO: updateRaffle(id,raffle)
-//TODO: deleteRaffle(id)
-
 import { helpHttp } from '@/utils/helpHttp';
 import { AxiosError, AxiosResponse } from 'axios';
 
@@ -96,3 +88,20 @@ export const deleteRaffle = async (id: string, token: string) => {
 
 	return (res as AxiosResponse).data as Raffle[];
 };
+
+export const addUserRaffle = async (raffleId: string, token: string) => {
+  const res = await helpHttp({
+    url: `/raffle/users/${raffleId}`,
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if ((res as AxiosError).isAxiosError) {
+    return res as AxiosError;
+  }
+
+  return (res as AxiosResponse).data as Raffle;
+
+}
