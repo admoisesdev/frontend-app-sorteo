@@ -1,30 +1,25 @@
 'use client';
 
-//getRaffles, getRaffle
-
 import { getRaffle, getRaffles } from '@/services/raffleServices';
 import { useQuery } from '@tanstack/react-query';
 import useAuth from './useAuth';
+import { AxiosError } from 'axios';
 
-export const useRaffle = () => {
+export const useRaffle = (raffleId = '') => {
 	const { token } = useAuth();
 
-	console.log(token);
-
-	const queryRaffles = useQuery({
+	const queryRaffles = useQuery<Raffle[] | AxiosError>({
 		queryKey: ['raffles', token],
 		queryFn: () => getRaffles(token),
 	});
 
-	/*
-const queryRaffle = useQuery({
-		queryKey: ['raffles', raffleId],
-		queryFn: async () => await getRaffle(raffleId),
+	const queryRaffle = useQuery<Raffle | AxiosError>({
+		queryKey: ['raffles', raffleId, token],
+		queryFn: async () => await getRaffle(raffleId, token),
 	});
-
-
-	*/
+	
 	return {
 		queryRaffles,
+		queryRaffle
 	};
 };

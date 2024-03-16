@@ -119,7 +119,7 @@ export const Delete = () => {
 			viewBox='0 0 24 24'
 			strokeWidth={2}
 			stroke='currentColor'
-			className='w-6 h-6'>
+			className='w-6 h-6 hover:stroke-red-400 transition-colors duration-300'>
 			<path
 				strokeLinecap='round'
 				strokeLinejoin='round'
@@ -137,7 +137,7 @@ export const Edit = () => {
 			viewBox='0 0 24 24'
 			strokeWidth={2}
 			stroke='currentColor'
-			className='w-6 h-6'>
+			className='w-6 h-6 hover:stroke-blue-400 transition-colors duration-300'>
 			<path
 				strokeLinecap='round'
 				strokeLinejoin='round'

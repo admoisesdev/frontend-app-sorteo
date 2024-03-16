@@ -13,14 +13,22 @@ interface Prize {
 	id: string;
 }
 
+interface RaffleCreate {
+	name: string;
+	description: string;
+	endAt: string;
+	prize: string;
+	createAt?: string;
+}
+
 interface Raffle {
 	name: string;
 	description: string;
 	endAt: Date;
 	active: true;
 	prize: Prize[] | Prize | string;
-	users: User[],
-	createAt: Date;
+	users: User[];
+	createAt: string;
 	id: string;
 }
 
@@ -39,4 +47,20 @@ interface LoginUser {
 
 interface RegisterUser extends User {
 	password: string;
+}
+
+interface CreateParams {
+	raffle: Raffle;
+	token: string;
+}
+
+interface UpdateParams {
+	id: string;
+	raffle: Raffle;
+	token: string;
+}
+
+interface DeleteParams {
+	id: string;
+	token: string;
 }

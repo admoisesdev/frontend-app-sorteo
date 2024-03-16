@@ -1,13 +1,5 @@
 'use client';
 
-//Peticiones
-
-//TODO: getRaffles
-//TODO: getRaffle(id)
-//TODO: createRaffle(raffle)
-//TODO: updateRaffle(id,raffle)
-//TODO: deleteRaffle(id)
-
 import { helpHttp } from '@/utils/helpHttp';
 import { AxiosError, AxiosResponse } from 'axios';
 
@@ -43,7 +35,7 @@ export const getRaffle = async (raffleId: string, token: string) => {
 	return (res as AxiosResponse).data as Raffle;
 };
 
-export const createRaffle = async (raffle: Raffle, token: string) => {
+export const createRaffle = async (raffle: RaffleCreate, token: string) => {
 	const res = await helpHttp({
 		url: `/raffle/`,
 		method: 'POST',
@@ -62,7 +54,7 @@ export const createRaffle = async (raffle: Raffle, token: string) => {
 
 export const updateRaffle = async (
 	id: string,
-	raffle: Raffle,
+	raffle: RaffleCreate,
 	token: string
 ) => {
 	const res = await helpHttp({
