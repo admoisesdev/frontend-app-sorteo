@@ -15,7 +15,7 @@ const SorteosContainer = ({
 }) => {
 	const [openMenu, setOpenMenu] = useState(initialState);
 	return (
-		<div className={`w-full min-h-screen flex flex-col ${moreClass}`}>
+		<div className={`w-full min-h-screen relative flex flex-col ${moreClass}`}>
 			<header className='w-full h-20 p-4'>
 				<nav className='w-full h-full flex items-center justify-between'>
 					<Link

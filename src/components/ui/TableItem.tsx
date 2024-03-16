@@ -3,25 +3,41 @@ import { Delete, Edit } from '../icons';
 import { cutText } from '@/utils/utils';
 import { useMutationRaffle } from '@/hooks/useMutationRaffle';
 import Link from 'next/link';
+import { useState } from 'react';
 
 interface Props {
 	id: string;
 	name: string;
 	description: string;
 	position: number;
+	handleOpen: () => void;
+	getIdRaffle: (id: string) => void;
 }
 
-export const TableItem = ({ id, name, description, position }: Props) => {
+export const TableItem = ({
+	id,
+	name,
+	description,
+	position,
+	getIdRaffle,
+	handleOpen,
+}: Props) => {
 	const { mutationDelete } = useMutationRaffle();
 
 	const handleDeleteRaffle = async (id: string) => {
 		await mutationDelete.mutateAsync(id);
 	};
 
+	const handleOpenModal = (id: string) => {
+		handleOpen();
+		getIdRaffle(id);
+	};
+
 	return (
 		<TableRow
 			key={id}
-			className='bg-[#424C70]'>
+			onClick={() => handleOpenModal(id)}
+			className='bg-[#424C70] hover:bg-blue-app-700 cursor-pointer transition-colors duration-200'>
 			<TableCell className='text-center border-l-4 border-l-purple-app-400 sm:text-lg'>
 				{position + 1}
 			</TableCell>

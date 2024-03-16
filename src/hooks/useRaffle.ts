@@ -13,13 +13,14 @@ export const useRaffle = (raffleId = '') => {
 		queryFn: () => getRaffles(token),
 	});
 
+
 	const queryRaffle = useQuery<Raffle | AxiosError>({
 		queryKey: ['raffles', raffleId, token],
 		queryFn: async () => await getRaffle(raffleId, token),
 	});
-	
+
 	return {
 		queryRaffles,
-		queryRaffle
+		queryRaffle,
 	};
 };
