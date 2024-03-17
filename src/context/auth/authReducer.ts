@@ -23,7 +23,7 @@ export const initialAuthState: AuthState = {
 
 type AuthAction =
   | { type: "LOGIN_SUCCESS"; payload: { token: string; user: User } }
-  | { type: "AUTH_ERROR"; payload: AuthError }
+  | { type: "AUTH_ERROR"; payload: RequestError }
   | { type: "LOGOUT" };
 
 

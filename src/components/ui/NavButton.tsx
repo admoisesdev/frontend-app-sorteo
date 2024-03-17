@@ -33,8 +33,8 @@ export const NavButton = ({ pathLogout = "/" }: AppProps) => {
           <button
             className="w-full h-full text-sm flex items-center gap-2"
             onClick={() => {
-              logout();
               router.push(pathLogout);
+              logout();
             }}
           >
             <Logout />

@@ -1,25 +1,25 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
+"use client";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import dynamic from "next/dynamic";
 
-import { useEffect } from 'react';
-import useAuth from '@/hooks/useAuth';
+import { useEffect } from "react";
+import useAuth from "@/hooks/useAuth";
 
-import { CardOption } from '@/components/ui/CardOption';
-import SorteosContainer from '@/components/ui/SorteosContainer';
-import { ROLES } from '@/utils/utils';
+import { CardOption } from "@/components/ui/CardOption";
+import SorteosContainer from "@/components/ui/SorteosContainer";
+import { ROLES } from "@/utils/utils";
 
 const Sorteos = () => {
-	const router = useRouter();
-	const { isAuthenticated,user } = useAuth();
+  const router = useRouter();
+  const { isAuthenticated, user } = useAuth();
 
-	useEffect(() => {
+  useEffect(() => {
     if (!isAuthenticated || !user.role.includes(ROLES.ADMIN)) router.push("/");
   }, [isAuthenticated, router, user]);
-  
-	return (
+
+  return (
     <SorteosContainer moreClass="bg-hero-admin bg-cover bg-[80%_80%]">
       <main className="w-full min-h-[calc(100vh_-_10rem)] flex items-center justify-center p-4">
         <section
@@ -52,10 +52,6 @@ const Sorteos = () => {
       </main>
     </SorteosContainer>
   );
-		
 };
 
-export default dynamic(
-  async () => Sorteos,
-  { ssr: false }
-);
+export default dynamic(async () => Sorteos, { ssr: false });

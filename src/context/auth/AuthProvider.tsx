@@ -16,10 +16,7 @@ const AuthProvider = ({ children }: Props) => {
     authReducer,
     initialAuthState
   );
-  /* console.log({
-    isAuthenticated,
-    token,
-  }); */
+
 
   const login = async (user: User) => {
     const res = await loginAuth(user);
@@ -27,7 +24,7 @@ const AuthProvider = ({ children }: Props) => {
     if (res instanceof Error) {
       dispatch({
         type: "AUTH_ERROR",
-        payload: res.response?.data as AuthError,
+        payload: res.response?.data as RequestError,
       });
     } else {
       const { user, token } = res;
@@ -38,7 +35,6 @@ const AuthProvider = ({ children }: Props) => {
       } else {
         router.push("/");
       }
-
     }
   };
 

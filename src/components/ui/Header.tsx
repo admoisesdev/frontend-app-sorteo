@@ -10,7 +10,7 @@ interface AppProps {
 }
 
 export const Header = ({ pathLogout = "/" }: AppProps) => {
-  const { isAuthenticated,user } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   return (
     <header className="w-full h-18 p-4 md:pb-0">

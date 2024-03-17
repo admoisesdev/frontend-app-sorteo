@@ -1,91 +1,75 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-'use client';
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
-import { useRouter } from 'next/navigation';
+"use client";
 
-import { useEffect } from 'react';
-import useAuth from '@/hooks/useAuth';
-import { useMutationRaffle } from '@/hooks/useMutationRaffle';
-import { useRaffle } from '@/hooks/useRaffle';
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { useRouter } from "next/navigation";
 
-import { ROLES, getCurrentDate } from '@/utils/utils';
+import { useEffect } from "react";
+import useAuth from "@/hooks/useAuth";
+import { useMutationRaffle } from "@/hooks/useMutationRaffle";
+import { useRaffle } from "@/hooks/useRaffle";
 
-import { InputWithLabel } from '@/components/ui/InputWithLabel';
-import { TextareaWithLabel } from '@/components/ui/TextareaWithLabel';
-import { SelectRaffle } from '@/components/ui/SelectRaffle';
-import { LinkRaffle } from '@/components/ui/LinkRaffle';
-import { Toaster } from '@/components/ui/toaster';
-import { useToast } from '@/components/ui/use-toast';
+import { ROLES, getCurrentDate } from "@/utils/utils";
 
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { AxiosError } from 'axios';
+import { InputWithLabel } from "@/components/ui/InputWithLabel";
+import { TextareaWithLabel } from "@/components/ui/TextareaWithLabel";
+import { SelectRaffle } from "@/components/ui/SelectRaffle";
+import { LinkRaffle } from "@/components/ui/LinkRaffle";
+
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { AxiosError } from "axios";
 
 const EditarSorteo = ({ params }: Params) => {
   const router = useRouter();
   const { isAuthenticated, user } = useAuth();
 
-	const { queryRaffle } = useRaffle(params.id);
-	const { mutationUpdate, dateError } = useMutationRaffle();
-	const { toast } = useToast();
+  const { queryRaffle } = useRaffle(params.id);
+  const { mutationUpdate, dateError } = useMutationRaffle();
 
-	const {
-		register,
-		handleSubmit,
-		reset,
-		setError,
-		formState: { errors },
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { errors },
   } = useForm();
-  
+
   useEffect(() => {
     if (!isAuthenticated || !user.role.includes(ROLES.ADMIN)) router.push("/");
   }, [isAuthenticated, router, user]);
 
-	useEffect(() => {
-		if (
-			mutationUpdate.data &&
-			(mutationUpdate.data as AxiosError).status === 400
-		) {
-			setError('createAt', { message: dateError.error });
-		}
-	}, [dateError, setError, mutationUpdate]);
+  useEffect(() => {
+    if (
+      mutationUpdate.data &&
+      (mutationUpdate.data as AxiosError).status === 400
+    ) {
+      setError("createAt", { message: dateError.error });
+    }
+  }, [dateError, setError, mutationUpdate]);
 
-	useEffect(() => {
-		if (queryRaffle.data) {
-			const { name, description, prize, createAt, endAt } = queryRaffle.data as Raffle;
+  useEffect(() => {
+    if (queryRaffle.data) {
+      const { name, description, prize, createAt, endAt } =
+        queryRaffle.data as Raffle;
 
-			reset({
-				name,
-				description,
-				prize: prize.id,
-				createAt: createAt.split('T')[0],
-				endAt: endAt.split('T')[0],
-			});
-		}
-	}, [queryRaffle.data, reset]);
+      reset({
+        name,
+        description,
+        prize: prize.id,
+        createAt: createAt.split("T")[0],
+        endAt: endAt.split("T")[0],
+      });
+    }
+  }, [queryRaffle.data, reset]);
 
-	const onSubmit: SubmitHandler<FieldValues> = (data) => {
-		if (Object.keys(errors).length > 0) return;
-		mutationUpdate.mutateAsync({ id: params.id, raffle: data as RaffleCreate });
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (Object.keys(errors).length > 0) return;
+    mutationUpdate.mutateAsync({ id: params.id, raffle: data as RaffleCreate });
+  };
 
-		toast({
-			description: 'Sorteo se ha creado exitosamente.',
-			style: {
-				color: 'black',
-				backgroundColor: 'yellow',
-				border: 'none',
-			},
-    });
-    
-    setTimeout(() => {
-      router.push("/sorteos/lista");
-    },3000);
-	};
-
-	return (
+  return (
     <section className="w-full min-h-screen flex items-center justify-center bg-hero-sorteos bg-cover bg-[80%_80%] relative py-12 sm:py-0">
       <LinkRaffle />
 
-      <Toaster />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="p-4 w-full flex flex-col justify-center items-center"

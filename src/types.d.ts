@@ -1,4 +1,4 @@
-type AuthError = { error: string };
+type RequestError = { error: string };
 
 interface TableInfo {
 	id: number;

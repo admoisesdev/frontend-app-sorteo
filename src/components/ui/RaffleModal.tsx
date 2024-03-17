@@ -1,5 +1,5 @@
 import { useMutationWinner } from "@/hooks/useMutationWinner";
-import { formatDate } from '../../utils/utils';
+import { formatDate } from "../../utils/utils";
 
 import { Table, TableBody, TableCell, TableRow } from ".";
 import { CloseIcon } from "../icons";
@@ -11,7 +11,7 @@ interface AppProps {
 }
 
 export const RaffleModal = ({ isOpen, onClose, raffle }: AppProps) => {
-  const { winnerMutation, getRaffleUserId } = useMutationWinner(raffle?.id);
+  const { winnerMutation, getRaffleUserId } = useMutationWinner(raffle);
   return (
     <div
       className={`fixed top-0 w-full flex items-center justify-center bg-black/40 z-50 backdrop-blur-md py-16 lg:py-0 ${

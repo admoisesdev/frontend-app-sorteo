@@ -1,22 +1,27 @@
-import { useMutationParticipate } from '@/hooks/useMutationParticipate';
-import { ROLES, formatDate } from '@/utils/utils';
+import { useMutationParticipate } from "@/hooks/useMutationParticipate";
+import useAuth from "@/hooks/useAuth";
+import { ROLES, formatDate } from "@/utils/utils";
 
-import { CardBgGrid } from './CardBgGrid';
-import { CardInfoWithBg } from './CardInfoWithBg';
-import { FechaItem } from './FechaItem';
-import useAuth from '@/hooks/useAuth';
+import { CardBgGrid } from "./CardBgGrid";
+import { CardInfoWithBg } from "./CardInfoWithBg";
+import { FechaItem } from "./FechaItem";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface AppProps {
-	raffle: Raffle;
+  raffle: Raffle;
 }
 
 export const Presentacion = ({ raffle }: AppProps) => {
-  const { user,isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const { handleParticipate } = useMutationParticipate();
-  
 
-	return (
-    <section className="w-[90%] flex justify-center flex-col gap-4 items-center mx-auto">
+  return (
+    <section className="w-[90%] flex justify-center flex-col gap-8 items-center mx-auto">
       <div className="w-full sm:w-[25rem]">
         <header className="bg-gradient-to-l rounded-md from-[#FFC327] to-[#FFF500] p-1 rounded-b-none">
           <h2 className="text-xl text-center text-blue-app-800">
@@ -57,15 +62,39 @@ export const Presentacion = ({ raffle }: AppProps) => {
         </CardBgGrid>
       </div>
 
-      <button
-        onClick={handleParticipate}
-        className={`bg-gradient-to-l rounded-md from-[#FFC327] to-[#FFF500] hover:from-[#FFF500] hover:to-[#FFC327] px-4 py-2 text-2xl transition-all ${
-          !isAuthenticated || user.role.includes(ROLES.ADMIN) ? 'cursor-not-allowed pointer-events-none disabled:opacity-50' : 'cursor-pointer pointer-events-auto'
-        }`}
-        disabled={!isAuthenticated || user.role.includes(ROLES.ADMIN)}
-      >
-        Participar
-      </button>
+      {!isAuthenticated || user.role.includes(ROLES.ADMIN) ? (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <button
+                className={`bg-gradient-to-l rounded-md from-[#FFC327] to-[#FFF500] hover:from-[#FFF500] hover:to-[#FFC327] px-4 py-2 text-2xl transition-all ${
+                  !isAuthenticated || user.role.includes(ROLES.ADMIN)
+                    ? "cursor-not-allowed pointer-events-none disabled:opacity-50"
+                    : "cursor-pointer pointer-events-auto"
+                }`}
+                disabled={!isAuthenticated || user.role.includes(ROLES.ADMIN)}
+              >
+                Participar
+              </button>
+            </TooltipTrigger>
+            <TooltipContent className="">
+              <p>Debes autenticarte para participar</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ) : (
+        <button
+          onClick={handleParticipate}
+          className={`bg-gradient-to-l rounded-md from-[#FFC327] to-[#FFF500] hover:from-[#FFF500] hover:to-[#FFC327] px-4 py-2 text-2xl transition-all ${
+            !isAuthenticated || user.role.includes(ROLES.ADMIN)
+              ? "cursor-not-allowed pointer-events-none disabled:opacity-50"
+              : "cursor-pointer pointer-events-auto"
+          }`}
+          disabled={!isAuthenticated || user.role.includes(ROLES.ADMIN)}
+        >
+          Participar
+        </button>
+      )}
     </section>
   );
 };
