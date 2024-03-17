@@ -23,14 +23,15 @@ interface Raffle {
   users: User[];
   createAt: string;
   id: string;
+  winner?: string | null;
 }
 
 interface User {
-	id: string;
-	name: string;
-	email: string;
-	emailValidated: boolean;
-	role: string[];
+  id: string;
+  name: string;
+  email: string;
+  emailValidated: boolean;
+  role: string[];
 }
 
 interface RaffleCreate {
@@ -64,4 +65,9 @@ interface UpdateParams {
 interface DeleteParams {
 	id: string;
 	token: string;
+}
+
+interface Winner{
+  winner: boolean,
+  userId: string
 }

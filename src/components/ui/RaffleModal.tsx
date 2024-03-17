@@ -1,3 +1,4 @@
+import { useMutationWinner } from "@/hooks/useMutationWinner";
 import { Table, TableBody, TableCell, TableRow } from ".";
 import { CloseIcon } from "../icons";
 
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export const RaffleModal = ({ isOpen, onClose, raffle }: Props) => {
+  const { winnerMutation, getRaffleUserId } = useMutationWinner(raffle?.id);
   return (
     <div
       className={`absolute top-0 w-full flex items-center justify-center bg-black/40 z-50 backdrop-blur-md py-16 lg:py-0 ${
@@ -80,8 +82,21 @@ export const RaffleModal = ({ isOpen, onClose, raffle }: Props) => {
                       <TableCell className="text-center border-l-4 border-l-blue-app-400 text-lg p-1 px-4">
                         {user.name}
                       </TableCell>
-                      <TableCell className="text-center text-lg p-1 px-4 bg-blue-400 cursor-pointer">
-                        <button>Elegir</button>
+                      <TableCell
+                        className={`${
+                          user.id === raffle?.winner
+                            ? "bg-green-600"
+                            : "bg-blue-400"
+                        } text-center text-lg p-1 px-4 cursor-pointer`}
+                      >
+                        <button
+                          onClick={() => {
+                            getRaffleUserId(user.id);
+                            winnerMutation.mutate();
+                          }}
+                        >
+                          {user.id === raffle?.winner ? "Ganador" : "Elegir"}
+                        </button>
                       </TableCell>
                     </TableRow>
                   ))

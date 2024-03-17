@@ -16,7 +16,7 @@ export const useRaffle = (id?: string) => {
 
 
 	const queryRaffle = useQuery<Raffle | AxiosError>({
-    queryKey: ["raffles", { raffleId: id ? id : raffleId, token }],
+    queryKey: ["raffle", id ? id : raffleId],
     queryFn: () => getRaffle(id ? id : raffleId, token),
   });
   

@@ -107,3 +107,19 @@ export const addUserRaffle = async (raffleId: string, token: string) => {
   return (res as AxiosResponse).data as Raffle;
 
 }
+
+export const toggleUserWinner = async (raffleId: string, userId: string, token: string) => {
+  const res = await helpHttp({
+    url: `/raffle/winner/${raffleId}/${userId}`,
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if ((res as AxiosError).isAxiosError) {
+    return res as AxiosError;
+  }
+
+  return (res as AxiosResponse).data as Winner;
+}
