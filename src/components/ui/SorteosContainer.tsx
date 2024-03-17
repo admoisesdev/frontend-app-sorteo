@@ -1,16 +1,14 @@
-'use client';
+"use client";
 
-import { Header } from '../Header';
+import { Header } from "./Header";
 
+interface AppProps {
+  children: React.ReactNode;
+  moreClass: string;
+}
 
-const SorteosContainer = ({
-	children,
-	moreClass,
-}: {
-	children: React.ReactNode;
-	moreClass: string;
-}) => {
-	return (
+const SorteosContainer = ({ children, moreClass }: AppProps) => {
+  return (
     <div className={`w-full min-h-screen flex flex-col ${moreClass}`}>
       <Header />
       {children}

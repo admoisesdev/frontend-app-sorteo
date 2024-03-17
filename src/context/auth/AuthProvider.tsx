@@ -15,10 +15,10 @@ const AuthProvider = ({ children }: Props) => {
     authReducer,
     initialAuthState
   );
-  console.log({
+  /* console.log({
     isAuthenticated,
     token,
-  });
+  }); */
 
   const login = async (user: User) => {
     const res = await loginAuth(user);

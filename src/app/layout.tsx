@@ -23,7 +23,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body
-				className={kelly.className}
+				className={`${kelly.className} bg-[#2E2D54]`}
 				suppressHydrationWarning={true}>
 				<TanStackProvider>
 					<AuthProvider>{children}</AuthProvider>

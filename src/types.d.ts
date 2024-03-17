@@ -13,23 +13,16 @@ interface Prize {
 	id: string;
 }
 
-interface RaffleCreate {
-	name: string;
-	description: string;
-	endAt: string;
-	prize: string;
-	createAt?: string;
-}
 
 interface Raffle {
-	name: string;
-	description: string;
-	endAt: Date;
-	active: true;
-	prize: Prize[] | Prize | string;
-	users: User[];
-	createAt: string;
-	id: string;
+  name: string;
+  description: string;
+  endAt: string;
+  active: boolean;
+  prize: Prize;
+  users: User[];
+  createAt: string;
+  id: string;
 }
 
 interface User {
@@ -38,6 +31,14 @@ interface User {
 	email: string;
 	emailValidated: boolean;
 	role: string[];
+}
+
+interface RaffleCreate {
+  name: string;
+  description: string;
+  endAt: string;
+  prize: string;
+  createAt?: string;
 }
 
 interface LoginUser {

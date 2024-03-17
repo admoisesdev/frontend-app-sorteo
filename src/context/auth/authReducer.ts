@@ -53,7 +53,13 @@ export const authReducer = (
       localStorage.removeItem("isAuth");
       localStorage.removeItem("token");
 
-      return initialAuthState;
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: {} as User,
+        token: "",
+        messageError: null,
+      };
 
     default:
       return state;

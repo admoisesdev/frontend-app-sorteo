@@ -11,7 +11,7 @@ interface AppProps {
   pathLogout?: string;
 }
 
-export const LogoutButton = ({ pathLogout = "/" }: AppProps) => {
+export const NavButton = ({ pathLogout = "/" }: AppProps) => {
   const router = useRouter();
   const [openMenu, setOpenMenu] = useState(initialOpenMenu);
   const { logout, user } = useAuth();

@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Header } from "@/components/Header";
+import { Header } from "@/components/ui/Header";
 
 function Home() {
   return (

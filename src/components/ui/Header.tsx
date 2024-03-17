@@ -1,10 +1,9 @@
 import Link from "next/link";
 import useAuth from "@/hooks/useAuth";
-import { LogoutButton } from "./ui/LogoutButton";
+import { NavButton } from "./NavButton";
 
-interface AppProps{
-  pathLogout?: string
-
+interface AppProps {
+  pathLogout?: string;
 }
 
 export const Header = ({ pathLogout = "/" }: AppProps) => {
@@ -13,10 +12,12 @@ export const Header = ({ pathLogout = "/" }: AppProps) => {
   return (
     <header className="w-full h-20 p-4">
       <nav className="w-full h-full flex items-center justify-between">
-        <Link className="text-2xl uppercase text-white font-bold" href="/">Sorteo</Link>
+        <Link className="text-2xl uppercase text-white font-bold" href="/">
+          Sorteo
+        </Link>
 
         {isAuthenticated ? (
-          <LogoutButton pathLogout={pathLogout} />
+          <NavButton pathLogout={pathLogout} />
         ) : (
           <div className="flex items-center gap-4 text-white text-lg">
             <Link

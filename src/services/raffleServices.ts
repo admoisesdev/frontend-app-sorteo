@@ -20,6 +20,7 @@ export const getRaffles = async (token: string) => {
 };
 
 export const getRaffle = async (raffleId: string, token: string) => {
+
 	const res = await helpHttp({
 		url: `/raffle/${raffleId}`,
 		method: 'GET',
@@ -27,6 +28,7 @@ export const getRaffle = async (raffleId: string, token: string) => {
 			Authorization: `Bearer ${token}`,
 		},
 	});
+  
 
 	if ((res as AxiosError).isAxiosError) {
 		return res as AxiosError;
