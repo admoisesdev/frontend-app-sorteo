@@ -59,7 +59,7 @@ export const createRaffle = async (raffle: RaffleCreate, token: string) => {
 	});
 
 	if ((res as AxiosError).isAxiosError) {
-		return res as AxiosError;
+		return (res as AxiosError).response;
 	}
 
 	return (res as AxiosResponse).data as Raffle;
@@ -85,6 +85,7 @@ export const updateRaffle = async (
 
 	return (res as AxiosResponse).data as Raffle;
 };
+
 
 export const deleteRaffle = async (id: string, token: string) => {
 	const res = await helpHttp({

@@ -20,13 +20,11 @@ export const SelectRaffle = ({
 }: Props) => {
 	const { queryPrize } = usePrize();
 
-	const { data } = queryPrize;
-
 	return (
 		<div className='grid w-full items-center gap-1.5'>
 			<Label htmlFor={name}>{firtsLetterUppercase(labelText)}</Label>
 			<select
-				className={`h-10 w-full bg-transparent ${
+				className={`h-10 w-full bg-[#303259] ${
 					messageError !== '' ? 'border-red-500' : 'border-[#5B5E80]'
 				} text-[#BABABA] rounded-md border-2  px-3 py-2`}
 				id={name}
@@ -36,7 +34,7 @@ export const SelectRaffle = ({
 					defaultChecked>
 					Selecciona un premio
 				</option>
-				{(data as Prize[])?.map((item) => (
+				{(queryPrize.data as Prize[])?.map((item) => (
 					<option
 						key={item.id}
 						value={item.id}

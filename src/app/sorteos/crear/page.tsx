@@ -8,29 +8,55 @@ import { InputWithLabel } from '@/components/ui/InputWithLabel';
 import { TextareaWithLabel } from '@/components/ui/TextareaWithLabel';
 import { SelectRaffle } from '@/components/ui/SelectRaffle';
 import { LinkRaffle } from '@/components/ui/LinkRaffle';
+import { getCurrentDate } from '@/utils/utils';
+import { useEffect } from 'react';
+import { useToast } from '@/components/ui/use-toast';
+import { Toaster } from '@/components/ui/toaster';
+import { useRouter } from 'next/navigation';
+import { AxiosResponse } from 'axios';
 
 const CrearSorteo = () => {
-	const { mutationCreate } = useMutationRaffle();
+	const { mutationCreate, dateError } = useMutationRaffle();
+	const { toast } = useToast();
+
+	const router = useRouter();
 
 	const {
 		register,
 		handleSubmit,
-		reset,
+		setError,
 		formState: { errors },
 	} = useForm();
+
+	useEffect(() => {
+		if (
+			mutationCreate.data &&
+			(mutationCreate.data as AxiosResponse).status === 400
+		) {
+			setError('createAt', { message: dateError.error });
+		}
+	}, [dateError, setError, mutationCreate]);
 
 	const onSubmit: SubmitHandler<FieldValues> = (data) => {
 		if (Object.keys(errors).length > 0) return;
 
 		mutationCreate.mutateAsync(data as RaffleCreate);
 
-		reset();
+		toast({
+			description: 'Sorteo se ha creado exitosamente.',
+			style: {
+				color: 'black',
+				backgroundColor: 'yellow',
+				border: 'none',
+			},
+		});
 	};
 
 	return (
 		<section className='w-full min-h-screen flex items-center justify-center bg-hero-sorteos bg-cover bg-[80%_80%] overflow-y-hidden relative py-12 sm:py-0'>
 			<LinkRaffle />
 
+			<Toaster />
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className='p-4 w-full flex items-center flex-col justify-center'>
@@ -93,17 +119,19 @@ const CrearSorteo = () => {
 							name='createAt'
 							type='date'
 							register={register}
+							defaultValue={getCurrentDate()}
+							min={getCurrentDate()}
 							validacion={{
 								required: 'Este campo es requerido',
 							}}
 							messageError={errors.createAt ? `${errors.createAt.message}` : ''}
 						/>
-
 						<InputWithLabel
 							labelText='fecha Finalizacion'
 							name='endAt'
 							type='date'
 							register={register}
+							min={getCurrentDate()}
 							validacion={{
 								required: 'Este campo es requerido',
 							}}
@@ -111,12 +139,7 @@ const CrearSorteo = () => {
 						/>
 					</div>
 				</div>
-				<footer className='flex gap-2 justify-end w-[90%] min-[480px]:w-96'>
-					<button
-						className='p-2 bg-blue-app-400 text-white rounded-lg font-bold'
-						onClick={() => reset()}>
-						Limpiar
-					</button>
+				<footer className='flex gap-2 justify-end w-[90%] min-[480px]:w-96 mt-2'>
 					<button
 						className='px-4 py-2 bg-gradient-to-r from-[#FFC327] to-[#FFF500] text-blue-app-700 rounded-lg font-bold'
 						type='submit'>

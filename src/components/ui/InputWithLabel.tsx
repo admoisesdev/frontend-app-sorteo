@@ -10,6 +10,8 @@ interface Props {
 	validacion: object;
 	placeholder?: string;
 	messageError: string;
+	defaultValue?: string;
+	min?: string;
 	register: UseFormRegister<FieldValues>;
 }
 
@@ -20,7 +22,9 @@ export function InputWithLabel({
 	labelText,
 	validacion,
 	messageError,
+	defaultValue,
 	placeholder,
+	min,
 }: Props) {
 	return (
 		<div className='grid w-full max-w-sm items-center gap-1.5'>
@@ -28,6 +32,8 @@ export function InputWithLabel({
 			<Input
 				type={type}
 				id={name}
+				defaultValue={defaultValue}
+				min={min}
 				{...register(name, validacion)}
 				placeholder={placeholder}
 				className={`${

@@ -1,17 +1,22 @@
-import {
-	QueryClient,
-	useMutation,
-	useQueryClient,
-} from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
 	createRaffle,
 	deleteRaffle,
 	updateRaffle,
 } from '@/services/raffleServices';
 import useAuth from './useAuth';
+import { useState } from 'react';
+import { AxiosError, AxiosResponse } from 'axios';
+
+interface Error {
+	error: string;
+}
+
+const initialDateError = {} as Error;
 
 export const useMutationRaffle = () => {
 	const { token } = useAuth();
+	const [dateError, setDateError] = useState<Error>(initialDateError);
 
 	const queryClient = useQueryClient();
 
@@ -19,7 +24,13 @@ export const useMutationRaffle = () => {
 		mutationFn: (raffle: RaffleCreate) => {
 			return createRaffle(raffle, token);
 		},
-		onSuccess: () => {
+		onSuccess: (raffle) => {
+			const raffleError = raffle as AxiosResponse;
+
+			if (raffleError.status === 400) {
+				setDateError(raffleError.data);
+			}
+
 			queryClient.invalidateQueries({
 				predicate: (query) => query.queryKey[0] === 'raffles',
 			});
@@ -30,7 +41,9 @@ export const useMutationRaffle = () => {
 		mutationFn: ({ id, raffle }: { id: string; raffle: RaffleCreate }) => {
 			return updateRaffle(id, raffle, token);
 		},
-		onSuccess: () => {
+		onSuccess: (raffle) => {
+			console.log(raffle);
+
 			queryClient.invalidateQueries({
 				predicate: (query) => query.queryKey[0] === 'raffles',
 			});
@@ -49,6 +62,7 @@ export const useMutationRaffle = () => {
 	});
 
 	return {
+		dateError,
 		mutationCreate,
 		mutationUpdate,
 		mutationDelete,

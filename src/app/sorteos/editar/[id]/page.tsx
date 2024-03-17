@@ -13,23 +13,37 @@ import { SelectRaffle } from '@/components/ui/SelectRaffle';
 import { useMutationRaffle } from '@/hooks/useMutationRaffle';
 import { useRaffle } from '@/hooks/useRaffle';
 import { LinkRaffle } from '@/components/ui/LinkRaffle';
+import { getCurrentDate } from '@/utils/utils';
+import { Toaster } from '@/components/ui/toaster';
+import { useToast } from '@/components/ui/use-toast';
+import { AxiosError } from 'axios';
 
 const EditarSorteo = ({ params }: Params) => {
 	const router = useRouter();
 
 	const { queryRaffle } = useRaffle(params.id);
-	const { mutationUpdate } = useMutationRaffle();
+	const { mutationUpdate, dateError } = useMutationRaffle();
+	const { toast } = useToast();
 
 	const {
 		register,
 		handleSubmit,
 		reset,
+		setError,
 		formState: { errors },
 	} = useForm();
 
 	useEffect(() => {
-		// Verifica si hay datos de consulta disponibles
-		if (queryRaffle.data && queryRaffle) {
+		if (
+			mutationUpdate.data &&
+			(mutationUpdate.data as AxiosError).status === 400
+		) {
+			setError('createAt', { message: dateError.error });
+		}
+	}, [dateError, setError, mutationUpdate]);
+
+	useEffect(() => {
+		if (queryRaffle.data) {
 			const { name, description, prize, createAt, endAt } = queryRaffle.data;
 
 			reset({
@@ -39,20 +53,28 @@ const EditarSorteo = ({ params }: Params) => {
 				createAt: createAt.split('T')[0],
 				endAt: endAt.split('T')[0],
 			});
-
 		}
 	}, [queryRaffle.data, reset]);
 
 	const onSubmit: SubmitHandler<FieldValues> = (data) => {
 		if (Object.keys(errors).length > 0) return;
-
 		mutationUpdate.mutateAsync({ id: params.id, raffle: data as RaffleCreate });
+
+		toast({
+			description: 'Sorteo se ha creado exitosamente.',
+			style: {
+				color: 'black',
+				backgroundColor: 'yellow',
+				border: 'none',
+			},
+		});
 	};
 
 	return (
 		<section className='w-full min-h-screen flex items-center justify-center bg-hero-sorteos bg-cover bg-[80%_80%] relative py-12 sm:py-0'>
 			<LinkRaffle />
 
+			<Toaster />
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className='p-4 w-full flex flex-col justify-center items-center'>
@@ -114,6 +136,7 @@ const EditarSorteo = ({ params }: Params) => {
 							labelText='fecha de inicio'
 							name='createAt'
 							type='date'
+							min={getCurrentDate()}
 							register={register}
 							validacion={{
 								required: 'Este campo es requerido',
@@ -124,6 +147,7 @@ const EditarSorteo = ({ params }: Params) => {
 							labelText='fecha de finalización'
 							name='endAt'
 							type='date'
+							min={getCurrentDate()}
 							register={register}
 							validacion={{
 								required: 'Este campo es requerido',

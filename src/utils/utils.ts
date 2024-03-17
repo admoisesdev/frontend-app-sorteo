@@ -36,3 +36,20 @@ export const formatearFecha = (fechaIso: string): string => {
 
 	return `${dia}/${mes}/${anio}`;
 };
+
+export const getCurrentDate = () => {
+	const today = new Date();
+	const year = today.getFullYear();
+	let month: number | string = today.getMonth() + 1;
+	let day: number | string = today.getDate();
+
+	// Añadir un cero delante si el mes o el día son menores que 10
+	if (month < 10) {
+		month = `0${month}`;
+	}
+	if (day < 10) {
+		day = `0${day}`;
+	}
+
+	return `${year}-${month}-${day}`;
+};
