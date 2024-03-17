@@ -24,9 +24,9 @@ interface RaffleCreate {
 interface Raffle {
 	name: string;
 	description: string;
-	endAt: Date;
+	endAt: string;
 	active: true;
-	prize: Prize[] | Prize | string;
+	prize: Prize;
 	users: User[];
 	createAt: string;
 	id: string;

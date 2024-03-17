@@ -90,6 +90,7 @@ const config = {
 				'hero-home': 'url(/home.png)',
 				'hero-admin': 'url(/admin.png)',
 				'hero-sorteos': 'url(/hero-2.png)',
+				'hero-card': 'url(/hero-card.png)'
 			},
 		},
 	},

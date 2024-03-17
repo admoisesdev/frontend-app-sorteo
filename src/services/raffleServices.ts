@@ -3,6 +3,19 @@
 import { helpHttp } from '@/utils/helpHttp';
 import { AxiosError, AxiosResponse } from 'axios';
 
+export const getRaffleLatest = async (): Promise<Raffle | AxiosError> => {
+	const res = await helpHttp({
+		url: '/raffle/latest',
+		method: 'GET',
+	});
+
+	if ((res as AxiosError).isAxiosError) {
+		return res as AxiosError;
+	}
+
+	return (res as AxiosResponse).data as Raffle;
+};
+
 export const getRaffles = async (token: string) => {
 	const res = await helpHttp({
 		url: '/raffle',

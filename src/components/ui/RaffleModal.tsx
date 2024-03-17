@@ -8,7 +8,6 @@ interface Props {
 	handleOpen: () => void;
 }
 
-//Al querer obtener los datos del raffle obtiene los datos pero me sale undefined
 export const RaffleModal = ({ open, handleOpen, raffleId }: Props) => {
 	const { queryRaffle } = useRaffle(raffleId);
 
