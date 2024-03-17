@@ -1,6 +1,12 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+
+export const ROLES = {
+  ADMIN: 'ADMIN_ROLE',
+  USER: 'USER_ROLE',
+};
+
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
@@ -28,13 +34,9 @@ export const obtenerFechaActual = () => {
 	return fechaFormateada;
 };
 
-export const formatearFecha = (fechaIso: string): string => {
-	const fecha = new Date(fechaIso);
-	const dia = fecha.getDate().toString().padStart(2, '0');
-	const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-	const anio = fecha.getFullYear().toString();
-
-	return `${dia}/${mes}/${anio}`;
+export const formatDate = (dateISO: string) => {
+	
+	return dateISO?.split('T').at(0) as string;
 };
 
 export const getCurrentDate = () => {
@@ -43,7 +45,6 @@ export const getCurrentDate = () => {
 	let month: number | string = today.getMonth() + 1;
 	let day: number | string = today.getDate();
 
-	// Añadir un cero delante si el mes o el día son menores que 10
 	if (month < 10) {
 		month = `0${month}`;
 	}

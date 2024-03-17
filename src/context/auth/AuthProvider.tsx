@@ -4,6 +4,7 @@ import AuthContext from "./AuthContext";
 import { authReducer, initialAuthState } from "./authReducer";
 import { loginAuth } from "@/services/authServices";
 import { useRouter } from "next/navigation";
+import { ROLES } from "@/utils/utils";
 
 interface Props {
   children: React.ReactNode;
@@ -31,7 +32,13 @@ const AuthProvider = ({ children }: Props) => {
     } else {
       const { user, token } = res;
       dispatch({ type: "LOGIN_SUCCESS", payload: { user, token } });
-      router.push("/sorteos");
+
+      if (user.role.includes(ROLES.ADMIN)) {
+        router.push("/sorteos");
+      } else {
+        router.push("/");
+      }
+
     }
   };
 

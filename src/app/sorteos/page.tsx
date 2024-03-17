@@ -5,18 +5,19 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 import { useEffect } from 'react';
-
 import useAuth from '@/hooks/useAuth';
+
 import { CardOption } from '@/components/ui/CardOption';
 import SorteosContainer from '@/components/ui/SorteosContainer';
+import { ROLES } from '@/utils/utils';
 
 const Sorteos = () => {
 	const router = useRouter();
-	const { isAuthenticated } = useAuth();
+	const { isAuthenticated,user } = useAuth();
 
 	useEffect(() => {
-		if (!isAuthenticated) router.push('/');
-	}, [isAuthenticated, router]);
+    if (!isAuthenticated || !user.role.includes(ROLES.ADMIN)) router.push("/");
+  }, [isAuthenticated, router, user]);
   
 	return (
     <SorteosContainer moreClass="bg-hero-admin bg-cover bg-[80%_80%]">

@@ -16,10 +16,10 @@ export const CardInfoWithBg = ({
 	return (
 		<div className='w-full bg-hero-card rounded-md'>
 			<div
-				className={`bg-black/20 rounded-md backdrop-blur-sm flex flex-col gap-2 px-4 py-2 ${classNameCardContiner}`}>
+				className={`bg-black/20 rounded-md h-full backdrop-blur-sm flex flex-col gap-2 px-4 py-2 ${classNameCardContiner}`}>
 				<h3 className={`text-white font-bold ${classNameTitle}`}>{title}</h3>
 				<p
-					className={`p-2 text-blue-app-800 rounded-md bg-white/60 ${classNameDescription}`}>
+					className={`flex-1 p-2 text-blue-app-800 rounded-md bg-white/60 ${classNameDescription}`}>
 					{description}
 				</p>
 			</div>

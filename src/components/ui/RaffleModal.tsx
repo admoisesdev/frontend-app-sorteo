@@ -1,18 +1,20 @@
 import { useMutationWinner } from "@/hooks/useMutationWinner";
+import { formatDate } from '../../utils/utils';
+
 import { Table, TableBody, TableCell, TableRow } from ".";
 import { CloseIcon } from "../icons";
 
-interface Props {
+interface AppProps {
   isOpen: boolean;
   onClose: () => void;
   raffle: Raffle;
 }
 
-export const RaffleModal = ({ isOpen, onClose, raffle }: Props) => {
+export const RaffleModal = ({ isOpen, onClose, raffle }: AppProps) => {
   const { winnerMutation, getRaffleUserId } = useMutationWinner(raffle?.id);
   return (
     <div
-      className={`absolute top-0 w-full flex items-center justify-center bg-black/40 z-50 backdrop-blur-md py-16 lg:py-0 ${
+      className={`fixed top-0 w-full flex items-center justify-center bg-black/40 z-50 backdrop-blur-md py-16 lg:py-0 ${
         isOpen ? "opacity-100 visible" : "opacity-0 invisible"
       }`}
     >
@@ -48,14 +50,14 @@ export const RaffleModal = ({ isOpen, onClose, raffle }: Props) => {
             <div className="flex-1">
               <h3 className="text-lg mb-2">Fecha de inicio</h3>
               <p className="bg-blue-dark-app-500 text-white p-2 rounded-md border-r-4 border-r-blue-app-400">
-                {raffle?.createAt.split("T").at(0)}
+                {formatDate(raffle?.createAt)}
               </p>
             </div>
 
             <div className="flex-1">
               <h3 className="text-lg mb-2">Fecha de termino</h3>
               <p className="bg-blue-dark-app-500 text-white p-2 rounded-md border-r-4 border-r-blue-app-400">
-                {raffle?.endAt.split("T").at(0)}
+                {formatDate(raffle?.endAt)}
               </p>
             </div>
           </section>

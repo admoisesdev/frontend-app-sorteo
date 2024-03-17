@@ -30,7 +30,6 @@ const Login = () => {
 
     login(data as User);
 
-    reset();
   };
 
   return (
@@ -84,10 +83,6 @@ const Login = () => {
             messageError={errors.password ? `${errors.password.message}` : ""}
           />
 
-          <AuthLink
-            route="/auth/register"
-            text="¿No tienes cuenta? Registrate"
-          />
         </div>
 
         <div className="w-full flex flex-col items-center gap-2">

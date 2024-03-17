@@ -10,11 +10,11 @@ function Home() {
   const { queryRaffleLatest } = useRaffleLatest();
 
   return (
-    <div className='w-full min-h-screen bg-hero-home bg-cover bg-[50%_50%]'>
-      <div className='w-full h-full backdrop-blur-sm bg-opacity-40 bg-black'>
+    <div className="w-full min-h-screen bg-hero-home bg-cover bg-[50%_50%]">
+      <div className="w-full min-h-screen backdrop-blur-sm bg-opacity-40 bg-black">
         <Header pathLogout="/auth/login" />
-        
-        <main className='w-full min-h-[calc(100vh_-_5rem)] pb-4 lg:p-0'>
+
+        <main className="w-full min-h-[calc(100vh_-_5rem)] pb-4 lg:p-0">
           <Presentacion raffle={queryRaffleLatest.data as Raffle} />
         </main>
       </div>

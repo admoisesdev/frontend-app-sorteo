@@ -1,5 +1,8 @@
 import Link from "next/link";
 import useAuth from "@/hooks/useAuth";
+
+import { ROLES } from "@/utils/utils";
+
 import { NavButton } from "./NavButton";
 
 interface AppProps {
@@ -7,12 +10,19 @@ interface AppProps {
 }
 
 export const Header = ({ pathLogout = "/" }: AppProps) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated,user } = useAuth();
 
   return (
-    <header className="w-full h-20 p-4">
+    <header className="w-full h-18 p-4 md:pb-0">
       <nav className="w-full h-full flex items-center justify-between">
-        <Link className="text-2xl uppercase text-white font-bold" href="/">
+        <Link
+          className="text-2xl uppercase text-white font-bold"
+          href={
+            isAuthenticated && user && user.role.includes(ROLES.ADMIN)
+              ? "/sorteos"
+              : "/"
+          }
+        >
           Sorteo
         </Link>
 

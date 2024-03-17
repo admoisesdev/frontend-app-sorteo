@@ -46,6 +46,7 @@ export const authReducer = (
         ...state,
         isAuthenticated: true,
         user: action.payload.user,
+        token: action.payload.token,
         messageError: null,
       };
     case "LOGOUT":

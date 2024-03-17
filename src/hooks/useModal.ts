@@ -7,10 +7,12 @@ export const useModal = () => {
 
   const onOpen = () => {
     setOpen(true);
+    document.body.style.overflow = "hidden";
   };
 
   const onClose = () => {
     setOpen(false);
+    document.body.style.overflow = "auto";
   };
 
   return {

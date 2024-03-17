@@ -1,32 +1,40 @@
 'use client';
 
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
+import { useEffect } from 'react';
+import useAuth from '@/hooks/useAuth';
 import { useMutationRaffle } from '@/hooks/useMutationRaffle';
+
+import { ROLES, getCurrentDate } from '@/utils/utils';
 
 import { InputWithLabel } from '@/components/ui/InputWithLabel';
 import { TextareaWithLabel } from '@/components/ui/TextareaWithLabel';
 import { SelectRaffle } from '@/components/ui/SelectRaffle';
 import { LinkRaffle } from '@/components/ui/LinkRaffle';
-import { getCurrentDate } from '@/utils/utils';
-import { useEffect } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { Toaster } from '@/components/ui/toaster';
-import { useRouter } from 'next/navigation';
+
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { AxiosResponse } from 'axios';
 
 const CrearSorteo = () => {
+  const router = useRouter();
+  const { isAuthenticated, user } = useAuth();
 	const { mutationCreate, dateError } = useMutationRaffle();
 	const { toast } = useToast();
 
-	const router = useRouter();
 
 	const {
 		register,
 		handleSubmit,
 		setError,
 		formState: { errors },
-	} = useForm();
+  } = useForm();
+  
+  useEffect(() => {
+    if (!isAuthenticated || !user.role.includes(ROLES.ADMIN)) router.push("/");
+  }, [isAuthenticated, router, user]);
 
 	useEffect(() => {
 		if (
@@ -49,7 +57,11 @@ const CrearSorteo = () => {
 				backgroundColor: 'yellow',
 				border: 'none',
 			},
-		});
+    });
+    
+    setTimeout(() => {
+      router.push("/sorteos/lista");
+    }, 3000);
 	};
 
 	return (
@@ -139,7 +151,7 @@ const CrearSorteo = () => {
 						/>
 					</div>
 				</div>
-				<footer className='flex gap-2 justify-end w-[90%] min-[480px]:w-96 mt-2'>
+				<footer className='flex gap-2 justify-end w-[90%] min-[480px]:w-96 mt-3'>
 					<button
 						className='px-4 py-2 bg-gradient-to-r from-[#FFC327] to-[#FFF500] text-blue-app-700 rounded-lg font-bold'
 						type='submit'>

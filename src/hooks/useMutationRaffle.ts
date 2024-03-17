@@ -44,7 +44,6 @@ export const useMutationRaffle = () => {
 			return updateRaffle(id, raffle, token);
 		},
 		onSuccess: (raffle) => {
-			console.log(raffle);
 
 			queryClient.invalidateQueries({
 				predicate: (query) => query.queryKey[0] === 'raffles',
