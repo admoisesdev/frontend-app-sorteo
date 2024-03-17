@@ -1,25 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import { useRouter } from 'next/navigation';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 import { useEffect } from 'react';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { useMutationRaffle } from '@/hooks/useMutationRaffle';
+import { useRaffle } from '@/hooks/useRaffle';
+
+import { getCurrentDate } from '@/utils/utils';
 
 import { InputWithLabel } from '@/components/ui/InputWithLabel';
 import { TextareaWithLabel } from '@/components/ui/TextareaWithLabel';
 import { SelectRaffle } from '@/components/ui/SelectRaffle';
-
-import { useMutationRaffle } from '@/hooks/useMutationRaffle';
-import { useRaffle } from '@/hooks/useRaffle';
 import { LinkRaffle } from '@/components/ui/LinkRaffle';
-import { getCurrentDate } from '@/utils/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { useToast } from '@/components/ui/use-toast';
+
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { AxiosError } from 'axios';
 
 const EditarSorteo = ({ params }: Params) => {
-	const router = useRouter();
 
 	const { queryRaffle } = useRaffle(params.id);
 	const { mutationUpdate, dateError } = useMutationRaffle();
@@ -44,7 +43,7 @@ const EditarSorteo = ({ params }: Params) => {
 
 	useEffect(() => {
 		if (queryRaffle.data) {
-			const { name, description, prize, createAt, endAt } = queryRaffle.data;
+			const { name, description, prize, createAt, endAt } = queryRaffle.data as Raffle;
 
 			reset({
 				name,

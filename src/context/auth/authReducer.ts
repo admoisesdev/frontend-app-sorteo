@@ -6,9 +6,18 @@ interface AuthState {
 }
 
 export const initialAuthState: AuthState = {
-  isAuthenticated: Boolean(localStorage.getItem("isAuth")),
-  user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : {},
-  token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token") as string) : "",
+  isAuthenticated:
+    typeof window !== "undefined"
+      ? Boolean(localStorage.getItem("isAuth"))
+      : false,
+  user:
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("user") as string)
+      : {},
+  token:
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("token") as string)
+      : "",
   messageError: null,
 };
 
@@ -44,7 +53,13 @@ export const authReducer = (
       localStorage.removeItem("isAuth");
       localStorage.removeItem("token");
 
-      return initialAuthState;
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: {} as User,
+        token: "",
+        messageError: null,
+      };
 
     default:
       return state;

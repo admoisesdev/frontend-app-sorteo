@@ -5,6 +5,7 @@ import TanStackProvider from '@/providers/TanStackProvider';
 import AuthProvider from '@/context/auth/AuthProvider';
 
 import '../styles/globals.css';
+import { useState } from 'react';
 
 const kelly = Kelly_Slab({ subsets: ['latin'], weight: ['400'] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+
 	return (
 		<html lang='en'>
 			<body

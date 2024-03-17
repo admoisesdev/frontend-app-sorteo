@@ -3,14 +3,14 @@ import { Delete, Edit } from '../icons';
 import { cutText } from '@/utils/utils';
 import { useMutationRaffle } from '@/hooks/useMutationRaffle';
 import Link from 'next/link';
-import { useState } from 'react';
+import { MouseEvent } from 'react';
 
 interface Props {
 	id: string;
 	name: string;
 	description: string;
 	position: number;
-	handleOpen: () => void;
+	onOpen: () => void;
 	getIdRaffle: (id: string) => void;
 }
 
@@ -20,18 +20,21 @@ export const TableItem = ({
 	description,
 	position,
 	getIdRaffle,
-	handleOpen,
+	onOpen,
 }: Props) => {
 	const { mutationDelete } = useMutationRaffle();
 
-	const handleDeleteRaffle = async (id: string) => {
+	const handleDeleteRaffle = async (e: MouseEvent<HTMLButtonElement>,id: string) => {
+    e.stopPropagation();
 		await mutationDelete.mutateAsync(id);
 	};
 
 	const handleOpenModal = (id: string) => {
-		handleOpen();
+		onOpen();
 		getIdRaffle(id);
 	};
+
+  
 
 	return (
 		<TableRow
@@ -46,10 +49,10 @@ export const TableItem = ({
 				{cutText(description)}
 			</TableCell>
 			<TableCell className='text-center flex flex-col min-[480px]:flex-row gap-2 items-center justify-center'>
-				<Link href={`/sorteos/editar/${id}`}>
+				<Link onClick={e => e.stopPropagation()} href={`/sorteos/editar/${id}`}>
 					<Edit />
 				</Link>
-				<button onClick={() => handleDeleteRaffle(id)}>
+				<button onClick={(e) => handleDeleteRaffle(e,id)}>
 					<Delete />
 				</button>
 			</TableCell>

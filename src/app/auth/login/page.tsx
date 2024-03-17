@@ -3,6 +3,7 @@
 import { Discord, Email } from "@/components/icons";
 import { AuthButton, AuthLink, TextField } from "@/components/ui";
 import useAuth from "@/hooks/useAuth";
+import Link from "next/link";
 import { useEffect } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
@@ -12,19 +13,19 @@ const Login = () => {
     handleSubmit,
     reset,
     formState: { errors },
-    setError
+    setError,
   } = useForm();
 
-  const { login, messageError } = useAuth()
-  
+  const { login, messageError } = useAuth();
 
   useEffect(() => {
-    if (messageError?.includes("email")) setError("email", { message: messageError });
-    if (messageError?.includes("password")) setError("password", { message: messageError });
+    if (messageError?.includes("email"))
+      setError("email", { message: messageError });
+    if (messageError?.includes("password"))
+      setError("password", { message: messageError });
   }, [messageError, setError]);
 
-
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {    
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (Object.keys(errors).length > 0) return;
 
     login(data as User);
@@ -33,7 +34,14 @@ const Login = () => {
   };
 
   return (
-    <section className="w-full h-full flex items-center justify-center">
+    <section className="w-full h-full flex flex-col items-center justify-around">
+      <Link
+        className="self-start text-2xl uppercase text-white font-bold pl-4"
+        href="/"
+      >
+        Sorteo
+      </Link>
+
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
