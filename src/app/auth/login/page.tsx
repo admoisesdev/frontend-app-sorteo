@@ -29,18 +29,10 @@ const Login = () => {
     if (Object.keys(errors).length > 0) return;
 
     login(data as User);
-
   };
 
   return (
     <section className="w-full h-full flex flex-col items-center justify-around">
-      <Link
-        className="self-start text-2xl uppercase text-white font-bold pl-4"
-        href="/"
-      >
-        Sorteo
-      </Link>
-
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
@@ -82,7 +74,6 @@ const Login = () => {
             placeholder="******"
             messageError={errors.password ? `${errors.password.message}` : ""}
           />
-
         </div>
 
         <div className="w-full flex flex-col items-center gap-2">
@@ -91,15 +82,6 @@ const Login = () => {
             moreclass="text-white bg-gradient-to-r from-blue-app-800 to-blue-app-600"
           >
             <Email /> Ingresar por correo
-          </AuthButton>
-
-          <span className="text-xl">ó</span>
-
-          <AuthButton
-            type="button"
-            moreclass="text-white bg-gradient-to-b from-blue-dark-app-200 to-blue-dark-app-900"
-          >
-            <Discord /> Ingresar por discord
           </AuthButton>
         </div>
       </form>

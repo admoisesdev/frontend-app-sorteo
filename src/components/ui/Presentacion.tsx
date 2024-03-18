@@ -21,7 +21,7 @@ export const Presentacion = ({ raffle }: AppProps) => {
   const { handleParticipate } = useMutationParticipate();
 
   return (
-    <section className="w-[90%] flex justify-center flex-col gap-8 items-center mx-auto">
+    <section className="w-[90%] flex justify-center flex-col gap-4 items-center mx-auto">
       <div className="w-full sm:w-[25rem]">
         <header className="bg-gradient-to-l rounded-md from-[#FFC327] to-[#FFF500] p-1 rounded-b-none">
           <h2 className="text-xl text-center text-blue-app-800">
