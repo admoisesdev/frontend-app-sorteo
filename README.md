@@ -75,9 +75,8 @@ Para el desarrollo de el _Frontend_ de esta _App Web_ se usaron las siguientes t
    Sigue las instrucciones en el [README del Backend](https://github.com/JKmoises/backend-app-sorteo) para iniciar la aplicación backend.
 
 5. **Iniciar aplicación frontend**
-
-   npm run dev
    ```bash
+   npm run dev
    ```
 
 6. **Accede a la aplicacion**
@@ -86,12 +85,10 @@ Para el desarrollo de el _Frontend_ de esta _App Web_ se usaron las siguientes t
 ## Usuarios de la aplicación 
 
 - **Rol: ADMIN**
-   **Correo**: usuario1@gmail.com
-   **Contraseña**: 123456
-
-
+   - **Correo**: usuario1@gmail.com
+   - **Contraseña**: 123456
 
 - **Rol: PARTICIPANTE**
-   **Correo**: usuario2@gmail.com
-   **Contraseña**: 123456
+   - **Correo**: usuario2@gmail.com
+   - **Contraseña**: 123456
 
