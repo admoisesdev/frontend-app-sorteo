@@ -14,7 +14,7 @@ import { SelectRaffle } from "@/components/ui/SelectRaffle";
 import { LinkRaffle } from "@/components/ui/LinkRaffle";
 
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 const CrearSorteo = () => {
   const router = useRouter();
@@ -25,8 +25,11 @@ const CrearSorteo = () => {
     register,
     handleSubmit,
     setError,
+    watch,
     formState: { errors },
   } = useForm();
+
+  const watchCreateAt = watch("createAt");
 
   useEffect(() => {
     if (!isAuthenticated || !user.role.includes(ROLES.ADMIN)) router.push("/");
@@ -35,11 +38,11 @@ const CrearSorteo = () => {
   useEffect(() => {
     if (
       mutationCreate.data &&
-      (mutationCreate.data as AxiosResponse).status === 400
+      (mutationCreate.data as AxiosError).status === 400
     ) {
       setError("createAt", { message: dateError.error });
     }
-  }, [dateError, setError, mutationCreate]);
+  }, [dateError, setError, mutationCreate.data]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     if (Object.keys(errors).length > 0) return;
@@ -92,8 +95,8 @@ const CrearSorteo = () => {
                   message: "descripción debe tener más de 50 caracteres",
                 },
                 maxLength: {
-                  value: 320,
-                  message: "descripción no debe tener más de 320 caracteres",
+                  value: 200,
+                  message: "descripción no debe tener más de 200 caracteres",
                 },
               }}
               messageError={
@@ -125,8 +128,8 @@ const CrearSorteo = () => {
               labelText="fecha Finalizacion"
               name="endAt"
               type="date"
+              min={watchCreateAt}
               register={register}
-              min={getCurrentDate()}
               validacion={{
                 required: "Este campo es requerido",
               }}

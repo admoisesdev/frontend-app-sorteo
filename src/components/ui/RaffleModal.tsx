@@ -34,7 +34,7 @@ export const RaffleModal = ({ isOpen, onClose, raffle }: AppProps) => {
             <h3 className="text-lg text-blue-dark-app-900">
               Descripción del sorteo
             </h3>
-            <p className="bg-blue-dark-app-500 text-white p-2 rounded-md">
+            <p className="bg-blue-dark-app-500 text-white p-2 rounded-md break-words">
               {raffle?.description}
             </p>
           </div>

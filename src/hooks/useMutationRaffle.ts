@@ -8,7 +8,7 @@ import {
 } from '@/services/raffleServices';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
@@ -26,23 +26,24 @@ export const useMutationRaffle = () => {
 		mutationFn: (raffle: RaffleCreate) => {
 			return createRaffle(raffle, token);
     },
-    onMutate: () => {
-      toast.success("El sorteo se ha creado exitosamente.");
-    },
 		onSuccess: (raffle) => {
-			const raffleError = raffle as AxiosResponse;
+			const raffleError = raffle as AxiosError;
+      const messageError = raffleError.response?.data as RequestError;
 
-			if (raffleError.status === 400) {
-				setDateError(raffleError.data);
+			if (raffleError.response?.status === 400) {
+        setDateError(messageError);
+      } else {
+        toast.success("El sorteo se ha creado exitosamente.");
+
+        queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === "raffles",
+        });
+
+        setTimeout(() => {
+          router.push("/sorteos/lista");
+        }, 3000);
       }
 
-			queryClient.invalidateQueries({
-				predicate: (query) => query.queryKey[0] === 'raffles',
-			});
-
-      setTimeout(() => {
-        router.push("/sorteos/lista");
-      }, 3000);
 		},
 	});
 
@@ -50,17 +51,26 @@ export const useMutationRaffle = () => {
 		mutationFn: ({ id, raffle }: { id: string; raffle: RaffleCreate }) => {
 			return updateRaffle(id, raffle, token);
     },
-    onMutate:() => { 
-      toast.success("El sorteo se ha actualizado exitosamente.");
-    },
-    onSuccess: () => {
-			queryClient.invalidateQueries({
-				predicate: (query) => query.queryKey[0] === 'raffles',
-      });
-      
-      setTimeout(() => {
-        router.push("/sorteos/lista");
-      }, 3000);
+    onSuccess: (raffle) => {
+      const raffleError = raffle as AxiosError;
+      const messageError = raffleError.response?.data as RequestError;
+      console.log(messageError);
+
+      if (raffleError.response?.status === 400) {
+        setDateError(messageError);
+      } else {
+        toast.success("El sorteo se ha actualizado exitosamente.");
+
+        queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey[0] === "raffles",
+        });
+
+        setTimeout(() => {
+          router.push("/sorteos/lista");
+        }, 3000);
+      }
+
+			
 		},
 	});
 

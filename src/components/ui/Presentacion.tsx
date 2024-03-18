@@ -65,17 +65,19 @@ export const Presentacion = ({ raffle }: AppProps) => {
       {!isAuthenticated || user.role.includes(ROLES.ADMIN) ? (
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger>
-              <button
-                className={`bg-gradient-to-l rounded-md from-[#FFC327] to-[#FFF500] hover:from-[#FFF500] hover:to-[#FFC327] px-4 py-2 text-2xl transition-all ${
-                  !isAuthenticated || user.role.includes(ROLES.ADMIN)
-                    ? "cursor-not-allowed pointer-events-none disabled:opacity-50"
-                    : "cursor-pointer pointer-events-auto"
-                }`}
-                disabled={!isAuthenticated || user.role.includes(ROLES.ADMIN)}
-              >
-                Participar
-              </button>
+            <TooltipTrigger
+              className={`bg-gradient-to-l rounded-md from-[#FFC327] to-[#FFF500] hover:from-[#FFF500] hover:to-[#FFC327] px-4 py-2 text-2xl transition-all ${
+                !isAuthenticated || user.role.includes(ROLES.ADMIN)
+                  ? "cursor-not-allowed disabled:opacity-50"
+                  : "cursor-pointer pointer-events-auto"
+              }`}
+              disabled={!isAuthenticated || user.role.includes(ROLES.ADMIN)}
+            >
+              {/* <button
+                
+              > */}
+              Participar
+              {/* </button> */}
             </TooltipTrigger>
             <TooltipContent className="">
               <p>Debes autenticarte para participar</p>

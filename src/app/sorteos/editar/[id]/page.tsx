@@ -30,8 +30,12 @@ const EditarSorteo = ({ params }: Params) => {
     handleSubmit,
     reset,
     setError,
+    getValues,
+    watch,
     formState: { errors },
   } = useForm();
+
+  const watchCreateAt = watch("createAt");
 
   useEffect(() => {
     if (!isAuthenticated || !user.role.includes(ROLES.ADMIN)) router.push("/");
@@ -40,11 +44,11 @@ const EditarSorteo = ({ params }: Params) => {
   useEffect(() => {
     if (
       mutationUpdate.data &&
-      (mutationUpdate.data as AxiosError).status === 400
+      (mutationUpdate.data as AxiosError).response?.status === 400
     ) {
       setError("createAt", { message: dateError.error });
     }
-  }, [dateError, setError, mutationUpdate]);
+  }, [dateError, setError, mutationUpdate.data]);
 
   useEffect(() => {
     if (queryRaffle.data) {
@@ -111,8 +115,8 @@ const EditarSorteo = ({ params }: Params) => {
                   message: "descripción debe tener más de 50 caracteres",
                 },
                 maxLength: {
-                  value: 320,
-                  message: "descripción no debe tener más de 300 caracteres",
+                  value: 200,
+                  message: "descripción no debe tener más de 200 caracteres",
                 },
               }}
               messageError={
@@ -143,7 +147,7 @@ const EditarSorteo = ({ params }: Params) => {
               labelText="fecha de finalización"
               name="endAt"
               type="date"
-              min={getCurrentDate()}
+              min={watchCreateAt}
               register={register}
               validacion={{
                 required: "Este campo es requerido",
