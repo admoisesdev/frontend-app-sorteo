@@ -33,25 +33,7 @@ Para el desarrollo de el _Frontend_ de esta _App Web_ se usaron las siguientes t
 
 ---
 
-## Estructura de carpetas y archivos:
-
-| Carpeta / Archivo    | Funcionalidad                                                                                                                                                      |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `/next`              | Contiene todos los archivos compiladors y optimizados para producción.                                                                                             |
-| `/public`            | Contiene todos los recursos estáticos como _imágenes_, _SVG_, _videos_, etc.                                                                                       |
-| `/src`               | Contiene todo el codigo fuente de la aplicación, incluyedo componentes React, funciones, utilidades, y otros archivos relacionados con la logica de la aplicación. |
-| `/src/app`           | Contiene todas las paginas de la app, donde cada carpeta representa una ruta especifica. Por ejemplo `/app/auth/login/page.tsx` esta seria la ruta `auth/login`    |
-| `/src/components`    | Contiene componentes reutilizables que se utilizan en diferentes partes de la aplicación                                                                           |
-| `/src/lib`           | Contiene todas las funciones que tendran la logica de las funcionalidades de nuestra página.                                                                       |
-| `/src/styles`        | Contiene todos los estilos archivos de los estilos globales o de especificos componentes                                                                           |
-| `.eslintrc.json`     | Archivo que define como eslint debe analizar el codigo, que reglas debe aplicar y que plugins debe utilizar, entre otras configuraciones.                          |
-| `components.json`    | Archivo de configuración que define la configuracion personalizada de Shadcn                                                                                       |
-| `next.config.mjs`    | Archivo que define la configuración personalizada para el entorno de desarrollo y producción.                                                                      |
-| `package.json`       | Archivo de configuración de dependencias de _NodeJS_.                                                                                                              |
-| `Tailwind.config.js` | Archivo para personalizar las opciones de Tailwind CSS, como colores, fuentes y márgenes, para adaptarse a las necesidades del proyecto.                           |
-| `tsconfig.json`      | Archivo que define la configuración del compilador typeScript, incluyendo opciones de compilación, rutas de inclusión y exclusión.                                 |
-
-## Depliegue de la aplicación
+## Pasos para levantar el frontend
 
 1. **Clona el Repositorio:**
 
@@ -92,3 +74,22 @@ Para el desarrollo de el _Frontend_ de esta _App Web_ se usaron las siguientes t
    - **Correo**: usuario2@gmail.com
    - **Contraseña**: 123456
 
+---
+
+## Estructura de carpetas y archivos:
+
+| Carpeta / Archivo    | Funcionalidad                                                                                                                                                      |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/next`              | Contiene todos los archivos compiladors y optimizados para producción.                                                                                             |
+| `/public`            | Contiene todos los recursos estáticos como _imágenes_, _SVG_, _videos_, etc.                                                                                       |
+| `/src`               | Contiene todo el codigo fuente de la aplicación, incluyedo componentes React, funciones, utilidades, y otros archivos relacionados con la logica de la aplicación. |
+| `/src/app`           | Contiene todas las paginas de la app, donde cada carpeta representa una ruta especifica. Por ejemplo `/app/auth/login/page.tsx` esta seria la ruta `auth/login`    |
+| `/src/components`    | Contiene componentes reutilizables que se utilizan en diferentes partes de la aplicación                                                                           |
+| `/src/lib`           | Contiene todas las funciones que tendran la logica de las funcionalidades de nuestra página.                                                                       |
+| `/src/styles`        | Contiene todos los estilos archivos de los estilos globales o de especificos componentes                                                                           |
+| `.eslintrc.json`     | Archivo que define como eslint debe analizar el codigo, que reglas debe aplicar y que plugins debe utilizar, entre otras configuraciones.                          |
+| `components.json`    | Archivo de configuración que define la configuracion personalizada de Shadcn                                                                                       |
+| `next.config.mjs`    | Archivo que define la configuración personalizada para el entorno de desarrollo y producción.                                                                      |
+| `package.json`       | Archivo de configuración de dependencias de _NodeJS_.                                                                                                              |
+| `tailwind.config.js` | Archivo para personalizar las opciones de Tailwind CSS, como colores, fuentes y márgenes, para adaptarse a las necesidades del proyecto.                           |
+| `tsconfig.json`      | Archivo que define la configuración del compilador typeScript, incluyendo opciones de compilación, rutas de inclusión y exclusión.                                 |
