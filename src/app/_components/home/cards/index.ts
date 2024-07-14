@@ -1,0 +1,5 @@
+export * from './CardDate'
+export * from './CardDateInfo'
+export * from './CardHeader'
+export * from './CardPremio'
+export * from './CardFullInfo'
