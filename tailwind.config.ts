@@ -30,6 +30,7 @@ const config = {
         'blue-app-light-500': '#356EFF',
 				'purple-app-400': '#6A1ECD',
 				'purple-app-600': '#9747FF',
+        'purple-app-300': '#7827B8',
         'purple-app-200': '#CC5FFF',
         'yellow-app-800': '#FFF500',
         'yellow-app-500': '#FFC327',
@@ -94,7 +95,8 @@ const config = {
       backgroundImage: {
         'hero-img': "url('/hero-image.png')",
         "hero-home": "url('/hero-home.png')",
-        'hero-card': "url('/hero-card.png')"
+        'hero-card': "url('/hero-card.png')",
+        'hero-admin': "url('/hero-admin.png')"
       }
     },
   },

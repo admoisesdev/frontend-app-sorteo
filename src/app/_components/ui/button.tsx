@@ -18,7 +18,9 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        withIcon: "flex gap-2 items-center justify-between",
+        dashboardPrimary: "variant-header-secondary p-4 text-xl font-semibold",
+        dashboardSecondary: "p-4 text-xl bg-purple-app-300 text-white font-semibold",
         auth: "w-full text-base sm:text-lg text-white bg-gradient-to-r from-blue-dark-app-700 to-blue-dark-app-400",
       },
       size: {

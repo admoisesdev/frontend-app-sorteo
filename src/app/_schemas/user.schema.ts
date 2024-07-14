@@ -3,7 +3,9 @@ import { z } from "zod"
 export const registerSchema = z.object({
   name: z.string().min(2, {
     message: "El nombre debe tener minimo 2 caracteres",
-  }),
+	}).max(12, {
+		message: "El nombre debe tener maximo 12 caracteres",
+	}),
 	email: z.string().email({
 		message: "Por favor, ingrese un correo valido",
 	}),

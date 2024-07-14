@@ -79,4 +79,14 @@
       @apply bg-gradient-to-l from-yellow-app-800 
       to-yellow-app-500 text-blue-dark-app-900
     }
+
+    .header-profile-menu {
+      @apply bg-purple-app-400 relative w-[10rem] h-[3rem] 
+			border-l-transparent before:content-[""] before:absolute before:w-0 
+			before:h-0 before:border-t-[1.5rem] before:border-t-transparent 
+			before:border-b-[1.5rem] before:border-b-transparent  
+			before:border-r-[2rem] before:border-r-purple-app-400 
+			before:left-[-2rem] px-5 flex items-center justify-between text-white 
+			shadow-md cursor-pointer 
+    }
   }
