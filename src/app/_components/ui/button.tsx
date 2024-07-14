@@ -22,6 +22,8 @@ const buttonVariants = cva(
         dashboardPrimary: "variant-header-secondary p-4 text-xl font-semibold",
         dashboardSecondary: "p-4 text-xl bg-purple-app-300 text-white font-semibold",
         auth: "w-full text-base sm:text-lg text-white bg-gradient-to-r from-blue-dark-app-700 to-blue-dark-app-400",
+        raffle: "variant-header-secondary px-4 text-base sm:text-lg",
+        raffleSecondary: "bg-blue-app-light-500 px-4 text-base sm:text-lg text-white"
       },
       size: {
         default: "h-9 px-4 py-2",

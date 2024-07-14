@@ -70,6 +70,12 @@
       rounded-md backdrop-blur-sm;
     }
 
+    .raffle-form-blur {
+      @apply space-y-3 sm:space-y-4 text-white 
+      w-11/12 min-[420px]:w-96 bg-blue-dark-app-200/50 py-3 lg:pt-5 px-4 
+      rounded-md backdrop-blur-sm;
+    }
+
     .variant-header-primary {
       @apply bg-gradient-to-r from-blue-app-light-500 
       to-purple-app-200 text-white

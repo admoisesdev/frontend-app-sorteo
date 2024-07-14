@@ -12,7 +12,8 @@ const inputVariants = cva(
         auth:
           "bg-transparent border-b border-l px-2 text-base placeholder:text-blue-dark-app-800",
         destructive: 
-        "bg-transparent border-b border-red-500 text-red-500 border-l px-2 text-base placeholder:text-red-500" 
+        "bg-transparent border-b border-red-500 text-red-500 border-l px-2 text-base placeholder:text-red-500", 
+        raffle: "bg-transparent border-2 border-gray-500 px-2 text-base placeholder:text-gray-400 rounded-sm",
       }
     },
     defaultVariants: {

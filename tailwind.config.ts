@@ -26,6 +26,7 @@ const config = {
 				'blue-dark-app-500': '#28335E',
 				'blue-dark-app-400': '#264085',
 				'blue-dark-app-300': '#353960',
+        'blue-dark-app-200': '#424C70',
 				'blue-app-light-800': '#3565E1',
         'blue-app-light-500': '#356EFF',
 				'purple-app-400': '#6A1ECD',
