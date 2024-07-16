@@ -5,11 +5,12 @@ import { useQuery } from "@tanstack/react-query"
 
 export const usePrize = () => {
 	const { user } = authStore()
+  const token = user?.token ?? ''
 
 	const prizeQuery = useQuery({
-		queryKey: ['prize',{token: user?.token ?? ''}],
+		queryKey: ['prize',{ token }],
 		queryFn: () => {
-			return getAllPrizeUsecase(apiFetcher,user?.token ?? '')
+			return getAllPrizeUsecase(apiFetcher,token)
 		}
 	})
 

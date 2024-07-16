@@ -8,18 +8,19 @@ import { useQuery } from "@tanstack/react-query"
 
 export const useRaffle = (id?: string) => {
 	const { user } = authStore()
+	const token = user?.token ?? ''
 
 	const raffleQuery = useQuery({
-		queryKey: ['raffle',{token: user?.token ?? ''}],
+		queryKey: ['raffles',{ token }],
 		queryFn: () => {
-			return getAllRafflesUseCase(apiFetcher,user?.token ?? '')
+			return getAllRafflesUseCase(apiFetcher,token)
 		}
 	})
 
 	const raffleQueryById = useQuery({
-		queryKey: ['raffleById',{token: user?.token ?? '', id}],
+		queryKey: ['raffle',{token, id}],
 		queryFn: () => {
-			return getRaffleByIdUsecase(apiFetcher,user?.token ?? '',id ?? '')
+			return getRaffleByIdUsecase(apiFetcher,token,id ?? '')
 		}
 	})
 

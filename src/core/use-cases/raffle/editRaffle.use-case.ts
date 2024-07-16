@@ -5,7 +5,7 @@ interface Props {
 	token: string,
 	raffleId: string
 	fetcher: HttpAdapter,
-	body: Record<string,string>,
+	body: Record<string,unknown>,
 }
 
 export const editRaffleUsecase = async ({token,raffleId,fetcher,body}: Props)

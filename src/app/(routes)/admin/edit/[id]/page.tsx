@@ -22,7 +22,7 @@ import { raffleSchema } from "@/app/_schemas/raffle.schema"
 
 import { TypographyH1 } from "@/app/_components/shared/typography"
 import { usePrize } from "@/app/_hooks/prize/usePrize"
-import { useRaffle } from "@/app/_hooks/raffle"
+import { useRaffle, useRaffleMutation } from "@/app/_hooks/raffle"
 
 
 const EditPage = ({ params }: Params) => {
@@ -33,6 +33,8 @@ const EditPage = ({ params }: Params) => {
 
 	const { raffleQueryById: { data } } = useRaffle(params.id);
 	const { prizeQuery } = usePrize();
+  const {editRaffleMutation} = useRaffleMutation()
+
 	const form = useForm<z.infer<typeof raffleSchema>>( {
 		resolver: zodResolver(raffleSchema),
 		defaultValues: {
@@ -58,7 +60,7 @@ const EditPage = ({ params }: Params) => {
 	},[data,form])
 
 	const onSubmit = (values: z.infer<typeof raffleSchema>) => {
-		console.log(values)
+		editRaffleMutation.mutate({body: values,raffleId: params.id})
 	}
 
 	return (
@@ -211,6 +213,12 @@ const EditPage = ({ params }: Params) => {
 						</FormItem>
 					) }
 				/>
+
+       {
+				 editRaffleMutation.isError && (
+					 <FormMessage>{editRaffleMutation.error?.message}</FormMessage>
+				 )
+			 }
 
 				<div className="flex justify-end gap-4 mt-4">
 					<Button

@@ -1,3 +1,6 @@
+import Link from "next/link"
+
+import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,13 +9,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/app/_components/ui/dropdown-menu"
-
-import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import { Button } from "../ui/button"
-import Link from "next/link"
+
 import { RaffleEntity } from "@/core/entities/raffle.entity"
+import { useRaffleMutation } from "@/app/_hooks/raffle"
+
 
 export const TableActions = ({raffle}: {raffle: RaffleEntity}) => {
+
+	const {deleteRaffleMutation} = useRaffleMutation()
+
+	const handleDeleteRaffle = (id: string) => {
+		deleteRaffleMutation.mutate(id)
+	}
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild className="bg-purple-app-300 hover:bg-purple-500
@@ -23,13 +33,13 @@ export const TableActions = ({raffle}: {raffle: RaffleEntity}) => {
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end" className="bg-purple-app-300 border-none text-white">
-				<DropdownMenuLabel>Actions</DropdownMenuLabel>
+				<DropdownMenuLabel>Acciones</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem>Ver sorteo</DropdownMenuItem>
 				<DropdownMenuItem>
 					<Link href={`/admin/edit/${raffle.id}`}>Editar sorteo</Link>
 				</DropdownMenuItem>
-				<DropdownMenuItem>Eliminar sorteo</DropdownMenuItem>
+				<DropdownMenuItem onClick={() => handleDeleteRaffle(raffle.id)}>Eliminar sorteo</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	)
