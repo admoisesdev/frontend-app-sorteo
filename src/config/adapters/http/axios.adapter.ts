@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
-import { MessageResponse } from "@/infrastructure/interfaces/api.responses";
+import { MessageErrorResponse } from "@/infrastructure/interfaces/api.responses";
 import { HttpAdapter } from "./http.adapter";
 
 interface Options {
@@ -42,10 +42,10 @@ export class AxiosAdapter implements HttpAdapter {
       return data;
     } catch (error) {
       const serverError = error as AxiosError;
-      const errorMessage = serverError.response?.data as MessageResponse;
+      const errorMessage = serverError.response?.data as MessageErrorResponse;
       console.log(errorMessage);
 
-      throw new Error(errorMessage.message);
+      throw new Error(errorMessage.error);
     }
   }
 
@@ -62,10 +62,10 @@ export class AxiosAdapter implements HttpAdapter {
       return data;
     } catch (error) {
       const serverError = error as AxiosError;
-      const errorMessage = serverError.response?.data as MessageResponse;
+      const errorMessage = serverError.response?.data as MessageErrorResponse;
       console.log(errorMessage);
 
-      throw new Error(errorMessage.message);
+      throw new Error(errorMessage.error);
     }
   }
 
@@ -82,10 +82,10 @@ export class AxiosAdapter implements HttpAdapter {
       return data;
     } catch (error) {
       const serverError = error as AxiosError;
-      const errorMessage = serverError.response?.data as MessageResponse;
+      const errorMessage = serverError.response?.data as MessageErrorResponse;
       console.log(errorMessage);
 
-      throw new Error(errorMessage.message);
+      throw new Error(errorMessage.error);
     }
   }
 
@@ -101,10 +101,10 @@ export class AxiosAdapter implements HttpAdapter {
       return data;
     } catch (error) {
       const serverError = error as AxiosError;
-      const errorMessage = serverError.response?.data as MessageResponse;
+      const errorMessage = serverError.response?.data as MessageErrorResponse;
       console.log(errorMessage);
       
-      throw new Error(errorMessage.message);
+      throw new Error(errorMessage.error);
     }
   }
 }

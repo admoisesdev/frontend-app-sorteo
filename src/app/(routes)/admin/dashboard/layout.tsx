@@ -1,3 +1,5 @@
+'use client'
+
 import { HeaderShared } from "@/app/_components/shared/header"
 
 const DashboardLayout = ( { children }: Readonly<{ children: React.ReactNode }> ) => {

@@ -1,27 +1,23 @@
-import { RaffleResponse } from "@/infrastructure/interfaces/api.responses";
-import { DataTable } from "../../../_components/raffles/DataTable";
-import { columns } from "../../../_components/raffles/columns";
+'use client'
+
 import { TypographyH1 } from "@/app/_components/shared/typography";
 
-const fetchData = async () => {
-	const raffles: RaffleResponse[] = Array.from({ length: 500 }, (_, index) => ({
-		id: crypto.randomUUID(),
-		prize: `Prize ${index + 1}`,
-		name: `Sorteo ${index + 1}`,
-	}));
+import { DataTable } from "../../../_components/raffles/DataTable";
+import { columns } from "../../../_components/raffles/columns";
 
-	return raffles
-}
+import { useRaffle } from "@/app/_hooks/raffle/useRaffle";
 
-const RafflesPage = async ()  => {
-	const data = await fetchData();
+const RafflesPage = ()  => {
+	const { raffleQuery } = useRaffle()
 
 	return (
 		<main className="w-full flex items-center justify-center p-2">
 			<section className="max-w-5xl w-full space-y-6 bg-blue-dark-app-300/80
 			p-4 rounded-md">
 				<TypographyH1 className="lg:text-4xl text-white">Lista de sorteos</TypographyH1>
-				<DataTable columns={columns} data={data} />
+				{
+					!raffleQuery.isLoading && <DataTable columns={columns} data={raffleQuery.data || []} />
+				}
 			</section>
 		</main>
 	)

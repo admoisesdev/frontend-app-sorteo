@@ -33,6 +33,8 @@ const config = {
 				'purple-app-600': '#9747FF',
         'purple-app-300': '#7827B8',
         'purple-app-200': '#CC5FFF',
+        'purple-ligth-100': '#CBC7FF',
+        'purple-light-150': '#C5D8FF',
         'yellow-app-800': '#FFF500',
         'yellow-app-500': '#FFC327',
 				'yellow-app-200': '#FFCC69',

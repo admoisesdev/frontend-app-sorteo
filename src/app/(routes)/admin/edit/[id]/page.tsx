@@ -1,10 +1,13 @@
 'use client'
 
+import { useEffect } from "react"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { format } from "date-fns"
 import { z } from "zod"
 
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/_components/ui/select"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/app/_components/ui/form"
 import { Popover, PopoverContent, PopoverTrigger } from "@/app/_components/ui/popover"
 import { Textarea } from "@/app/_components/ui/textarea"
@@ -14,20 +17,45 @@ import { Input } from "@/app/_components/ui/input"
 
 import { CalendarIcon } from "@radix-ui/react-icons"
 
-import { TypographyH1 } from "@/app/_components/shared/typography"
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher"
 import { raffleSchema } from "@/app/_schemas/raffle.schema"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/_components/ui/select"
 
-const EditPage = () => {
+import { TypographyH1 } from "@/app/_components/shared/typography"
+import { usePrize } from "@/app/_hooks/prize/usePrize"
+import { useRaffle } from "@/app/_hooks/raffle"
+
+
+const EditPage = ({ params }: Params) => {
+
+	const today = new Date()
+	const tomorrow = new Date(today)
+	tomorrow.setDate(today.getDate() + 1)
+
+	const { raffleQueryById: { data } } = useRaffle(params.id);
+	const { prizeQuery } = usePrize();
 	const form = useForm<z.infer<typeof raffleSchema>>( {
-		resolver: zodResolver( raffleSchema ),
+		resolver: zodResolver(raffleSchema),
 		defaultValues: {
-			title: "",
-			prize: "",
-			description: "",
-			createAt: new Date(),
-		},
-	} )
+      name: '',
+      endAt: today,
+      prize: '',
+      createAt: tomorrow,
+      description: ''
+    }
+	})
+
+	useEffect(() => {
+		if(data){
+			form.reset({
+				name: data.name,
+				endAt: new Date(data.endAt),
+				prize: data.prize.id,
+				createAt: new Date(data.createAt),
+				description: data.description,
+			})
+		}
+
+	},[data,form])
 
 	const onSubmit = (values: z.infer<typeof raffleSchema>) => {
 		console.log(values)
@@ -48,7 +76,7 @@ const EditPage = () => {
 
 				<FormField
 					control={ form.control }
-					name="title"
+					name="name"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Titulo</FormLabel>
@@ -66,7 +94,7 @@ const EditPage = () => {
 				<FormField
 					control={ form.control }
 					name="description"
-					render={({ field, formState: { errors }}) => (
+					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Descripción</FormLabel>
 							<FormControl>
@@ -88,7 +116,7 @@ const EditPage = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Seleccione el premio</FormLabel>
-              <Select onValueChange={field.onChange}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger className="border-2 border-gray-500">
                     <SelectValue placeholder="Selecciona un premio" />
@@ -96,9 +124,11 @@ const EditPage = () => {
                 </FormControl>
                 <SelectContent className="bg-blue-dark-app-200/80 
 								text-white backdrop-blur-md border-0 hover:bg-blue-dark-app-200">
-                  <SelectItem value="m@example.com">m@example.com</SelectItem>
-                  <SelectItem value="m@google.com">m@google.com</SelectItem>
-                  <SelectItem value="m@support.com">m@support.com</SelectItem>
+									{
+										prizeQuery.data?.map((prize) => (
+											<SelectItem value={prize.id} key={prize.id}>{prize.name}</SelectItem>
+										))
+									}
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -135,6 +165,44 @@ const EditPage = () => {
 										selected={field.value}
 										onSelect={field.onChange}
 										disabled={(date) => new Date() > date}
+										initialFocus
+									/>
+								</PopoverContent>
+							</Popover>
+							<FormMessage />
+						</FormItem>
+					) }
+				/>
+
+				<FormField
+					control={ form.control }
+					name="endAt"
+					render={ ( { field } ) => (
+						<FormItem className="flex flex-col">
+							<FormLabel>Fecha de Finalización</FormLabel>
+							<Popover>
+								<PopoverTrigger asChild>
+									<FormControl>
+										<Button
+											variant={"outline"}
+											className="pl-3 w-full bg-transparent hover:bg-transparent 
+											hover:text-white text-left font-normal border-2 border-gray-500">
+											{field.value ? (
+												format(field.value, "PPP")
+											) : (
+												<span className="text-gray-400">Fecha de finalización</span>
+											)}
+											<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+										</Button>
+									</FormControl>
+								</PopoverTrigger>
+								<PopoverContent className="w-auto p-0 bg-blue-dark-app-200/80 
+								text-white backdrop-blur-md border-0" align="start">
+									<Calendar
+										mode="single"
+										selected={field.value}
+										onSelect={field.onChange}
+										disabled={(date) => form.getValues("createAt") > date}
 										initialFocus
 									/>
 								</PopoverContent>

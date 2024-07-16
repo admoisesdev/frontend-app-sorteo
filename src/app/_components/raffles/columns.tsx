@@ -1,10 +1,10 @@
 "use client"
 
-import { RaffleResponse } from "@/infrastructure/interfaces/api.responses"
 import { ColumnDef } from "@tanstack/react-table"
+import { RaffleEntity } from "@/core/entities/raffle.entity"
 import { TableActions } from "./TableActions"
 
-export const columns: ColumnDef<RaffleResponse>[] = [
+export const columns: ColumnDef<RaffleEntity>[] = [
   {
     accessorKey: "position",
     header: "#N",
@@ -19,6 +19,31 @@ export const columns: ColumnDef<RaffleResponse>[] = [
   {
     accessorKey: "prize",
     header: "Premio",
+    cell: ({row}) => {
+      return row.original.prize.name
+    }
+  },
+  {
+    accessorKey: "createAt",
+    header: "Inicio",
+    cell: ({row}) => {
+      const date = new Date(row.original.createAt)
+
+      return date.toLocaleString('es-ES',{
+        dateStyle: 'short',
+      })
+    }
+  },
+  {
+    accessorKey: "endAt",
+    header: "Fin",
+    cell: ({row}) => {
+      const date = new Date(row.original.endAt)
+
+      return date.toLocaleString('es-ES',{
+        dateStyle: 'short',
+      })
+    }
   },
   {
     id: "actions",

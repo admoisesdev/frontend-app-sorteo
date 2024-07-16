@@ -3,6 +3,7 @@ import { Kelly_Slab } from "next/font/google";
 import "./globals.css";
 
 import { cn } from "./_lib/utils";
+import { TanStackProvider } from "./_context/TanStackPrivider";
 
 const kelly = Kelly_Slab( {
   subsets: [ "latin" ],
@@ -28,8 +29,11 @@ export default function RootLayout ( {
       <body className={cn(
         "antialiased",
         kelly.className
-      ) }>
-        { children }
+      ) }
+      suppressHydrationWarning={true}>
+        <TanStackProvider>
+          { children }
+        </TanStackProvider>
       </body>
     </html>
   );

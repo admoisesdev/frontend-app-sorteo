@@ -7,11 +7,12 @@ import {
   DropdownMenuTrigger,
 } from "@/app/_components/ui/dropdown-menu"
 
-import { RaffleResponse } from "@/infrastructure/interfaces/api.responses"
 import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import { Button } from "../ui/button"
+import Link from "next/link"
+import { RaffleEntity } from "@/core/entities/raffle.entity"
 
-export const TableActions = ({raffle}: {raffle: RaffleResponse}) => {
+export const TableActions = ({raffle}: {raffle: RaffleEntity}) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild className="bg-purple-app-300 hover:bg-purple-500
@@ -25,7 +26,9 @@ export const TableActions = ({raffle}: {raffle: RaffleResponse}) => {
 				<DropdownMenuLabel>Actions</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem>Ver sorteo</DropdownMenuItem>
-				<DropdownMenuItem>Editar sorteo</DropdownMenuItem>
+				<DropdownMenuItem>
+					<Link href={`/admin/edit/${raffle.id}`}>Editar sorteo</Link>
+				</DropdownMenuItem>
 				<DropdownMenuItem>Eliminar sorteo</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>

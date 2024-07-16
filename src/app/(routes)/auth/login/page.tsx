@@ -12,6 +12,7 @@ import { TypographyH1 } from "@/app/_components/shared/typography"
 import { FormLink } from "@/app/_components/auth"
 
 import { loginSchema } from "@/app/_schemas/user.schema"
+import { useLoginMutation } from "@/app/_hooks/auth"
 
 const LoginPage = () => {
 	const form = useForm<z.infer<typeof loginSchema>>({
@@ -22,8 +23,10 @@ const LoginPage = () => {
     },
   })
 
+	const { loginMutation } = useLoginMutation();
+
 	const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    console.log(values)
+		loginMutation.mutate(values);
   }
 
 	return (
@@ -73,16 +76,26 @@ const LoginPage = () => {
 					) }
 				/>
 
+				{
+					loginMutation.error && (
+						<FormMessage className="text-sm">
+							{loginMutation.error?.message}
+						</FormMessage>
+					)
+				}
+
 				<FormLink
 					to="/auth/register"
 					textLink="registrate aqui"
 					description="¿No tienes cuenta?"
 				/>
-
+				
+				
 				<Button
 					variant="auth" 
 					size="lg"
-					type="submit">
+					type="submit"
+					disabled={loginMutation.isPending}>
 					Iniciar sesion
 				</Button>
 			</form>

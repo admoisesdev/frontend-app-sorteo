@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const raffleSchema = z.object({
-	title: z.string().min(10, {
+	name: z.string().min(10, {
 		message: "El titulo debe tener minimo 10 caracteres",
 	}).max(50, {
 		message: "El titulo debe tener maximo 12 caracteres",
@@ -12,5 +12,6 @@ export const raffleSchema = z.object({
 		message: "La descripción debe tener maximo 300 caracteres",
 	}),
 	prize: z.string(),
-	createAt: z.date()
+	createAt: z.date(),
+	endAt: z.date(),
 })

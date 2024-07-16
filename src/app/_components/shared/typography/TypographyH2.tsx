@@ -8,7 +8,7 @@ interface Props {
 export const TypographyH2 = ({children, className}:Props) => {
 	return (
 		<h2 className={cn(
-			"scroll-m-20 text-3xl font-semibold tracking-tight",
+			"text-3xl font-semibold tracking-tight",
 			className
 		)}>
       {children}
