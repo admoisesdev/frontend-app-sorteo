@@ -4,10 +4,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { ChevronDownIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { firstLetterUppercase } from "@/config/helpers/firstLetterUppercase";
 
 import { ProfileMenu } from "./ProfileMenu";
 import { TypographyP } from "../typography";
+import { Formatter } from "@/config/helpers";
 
 interface Props {
   onLogout: () => void 
@@ -28,7 +28,7 @@ export const HeaderProfile = ({onLogout,username}: Props) => {
       className='header-profile-menu'
       onClick={() => setOpenMenu(!openMenu)}
     >
-      <TypographyP>{firstLetterUppercase(username)}</TypographyP>
+      <TypographyP>{Formatter.capitalizeFirstLetter(username)}</TypographyP>
       
       {
         openMenu 

@@ -8,8 +8,8 @@ export const raffleSchema = z.object({
 	}),
 	description: z.string().min(30,{
 		message: "La descripción debe tener minimo 30 caracteres",
-	}).max(300, {
-		message: "La descripción debe tener maximo 300 caracteres",
+	}).max(250, {
+		message: "La descripción debe tener maximo 250 caracteres",
 	}),
 	prize: z.string(),
 	createAt: z.date(),

@@ -200,7 +200,8 @@ const CreatePage = () => {
 					<Button
 						variant="raffleSecondary"
 						size="lg"
-						type="reset">
+						type="reset"
+						disabled={createRaffleMutation.isPending}>
 						Limpiar
 					</Button>
 

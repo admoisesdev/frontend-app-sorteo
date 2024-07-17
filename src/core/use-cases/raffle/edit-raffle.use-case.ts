@@ -10,10 +10,6 @@ interface Props {
 
 export const editRaffleUsecase = async ({token,raffleId,fetcher,body}: Props)
 : Promise<MessageResponse> => {
-	const messageResponse = await fetcher.put<MessageResponse>(`/raffle/${raffleId}`, body, {
-		headers: {
-			Authorization: `Bearer ${token}`
-		}
-	})
+	const messageResponse = await fetcher.put<MessageResponse>(`/raffle/${raffleId}`, body, {},token)
 	return messageResponse
 }

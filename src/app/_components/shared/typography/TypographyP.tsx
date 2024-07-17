@@ -8,7 +8,7 @@ interface Props {
 export const TypographyP = ({children, className}:Props) => {
 	return (
 		<p className={cn(
-			"leading-6 [&:not(:first-child)]:mt-6",
+			"leading-6",
 			className
 		)}>
       {children}

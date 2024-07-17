@@ -1,1 +1,1 @@
-export * from './getAllPrize.use-case'
+export * from './get-all-prize.use-case'

@@ -224,15 +224,17 @@ const EditPage = ({ params }: Params) => {
 					<Button
 						variant="raffleSecondary"
 						size="lg"
-						type="reset">
+						type="reset"
+						disabled={editRaffleMutation.isPending}>
 						Limpiar
 					</Button>
 
 					<Button
 						variant="raffle"
 						size="lg"
-						type="submit">
-						Crear
+						type="submit" 
+						disabled={editRaffleMutation.isPending}>
+						Actualizar
 					</Button>
 				</div>
 			</form>

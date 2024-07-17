@@ -3,11 +3,6 @@ import { PrizeEntity } from "@/core/entities/prize.entity";
 
 export const getAllPrizeUsecase = async (fetcher: HttpAdapter,token: string): 
 Promise<PrizeEntity[]> => {
-	const prizes = await fetcher.get<PrizeEntity[]>("/prize", {
-		headers: {
-			Authorization: `Bearer ${token}`
-		}
-	});
-
+	const prizes = await fetcher.get<PrizeEntity[]>("/prize",{},token);
 	return prizes
 }
