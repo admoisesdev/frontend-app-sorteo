@@ -32,14 +32,19 @@ export const TableActions = ({raffle}: {raffle: RaffleEntity}) => {
 					<DotsHorizontalIcon className="h-4 w-4" />
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end" className="bg-purple-app-300 border-none text-white">
+			<DropdownMenuContent align="end" className="bg-purple-app-300 border-none 
+			text-white">
 				<DropdownMenuLabel>Acciones</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>Ver sorteo</DropdownMenuItem>
+				<DropdownMenuItem>
+					<Link href={`/admin/raffles/${raffle.id}`}>Ver sorteo</Link>
+				</DropdownMenuItem>
 				<DropdownMenuItem>
 					<Link href={`/admin/edit/${raffle.id}`}>Editar sorteo</Link>
 				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => handleDeleteRaffle(raffle.id)}>Eliminar sorteo</DropdownMenuItem>
+				<DropdownMenuItem onClick={() => handleDeleteRaffle(raffle.id)}>
+					Eliminar sorteo
+				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	)

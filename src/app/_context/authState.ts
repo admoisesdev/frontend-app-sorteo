@@ -1,3 +1,5 @@
+'use client'
+
 import { AuthResponseUser } from '@/infrastructure/interfaces/user.response';
 import { create } from 'zustand'
 

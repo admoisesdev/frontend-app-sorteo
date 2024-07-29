@@ -19,11 +19,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  className?: string
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  className="text-white",
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -40,7 +42,7 @@ export function DataTable<TData, TValue>({
             {headerGroup.headers.map((header) => {
               return (
                 <TableHead key={header.id}
-                className="text-white">
+                className={className}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(

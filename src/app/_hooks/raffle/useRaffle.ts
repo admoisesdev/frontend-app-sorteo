@@ -1,6 +1,6 @@
 'use client'
 
-import { getAllRafflesUseCase, getRaffleByIdUsecase } from "@/core/use-cases/raffle"
+import { getAllRafflesUseCase, getRaffleByIdUsecase, getRaffleLatestUsecase } from "@/core/use-cases/raffle"
 import { apiFetcher } from "@/config/adapters/api.adapter"
 import { authStore } from "@/app/_context/authState"
 
@@ -24,8 +24,16 @@ export const useRaffle = (id?: string) => {
 		}
 	})
 
+	const raffleQueryLatest = useQuery({
+		queryKey: ['raffle-latest',{token}],
+		queryFn: () => {
+			return getRaffleLatestUsecase(apiFetcher,token)
+		}
+	})
+
 	return {
 		raffleQuery,
-		raffleQueryById
+		raffleQueryById,
+		raffleQueryLatest
 	}
 }

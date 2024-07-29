@@ -1,39 +1,49 @@
+'use client'
+
 import Link from "next/link"
-import { CardDateInfo, CardPremio,CardFullInfo } from "./cards"
+import { CardDateInfo, CardPremio, CardFullInfo } from "./cards"
+import { useRaffle } from "@/app/_hooks/raffle"
 
 export const Presentantion = () => {
+
+	const { raffleQueryLatest: { data, isLoading } } = useRaffle();
 
 	return (
 		<main className="text-blue-dark-app-900 w-11/12 max-w-3xl 
 		mx-auto flex flex-col items-center gap-4 py-4">
-			<CardPremio
-				premio="Cursos HTML5,CSS3,etc"
-			/>
+			{
+				!isLoading && data && (
+					<>
+						<CardPremio
+							premio={data.prize.name}
+						/>
 
-			<div className="grid md:grid-cols-2 place-items-center 
+						<div className="grid md:grid-cols-2 place-items-center 
 			w-full gap-4">
-				<CardFullInfo
-					title="Descripción del sorteo"
-					description="Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo Contenido aquí, contenido aquí. Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de"
-				/>
+							<CardFullInfo
+								title="Descripción del sorteo"
+								description={ data.description }
+							/>
 
-				<CardFullInfo
-					title="Descripción del premio"
-					description="Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo Contenido aquí, contenido aquí. Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de"
-				/>
-			</div>
+							<CardFullInfo
+								title="Descripción del premio"
+								description={ data.prize.description }
+							/>
+						</div>
 
-			<CardDateInfo
-				dateStart={ new Date() }
-				dateEnd={ new Date() }
-			/>
+						<CardDateInfo
+							dateStart={ new Date(data.createAt) }
+							dateEnd={ new Date(data.endAt) }
+						/>
 
-			<Link
-				href="/auth/login"
-				className='variant-header-secondary px-4 py-2 
-				rounded-md text-2xl'>
-				Participar
-			</Link>
+						<Link
+							href="/auth/login"
+							className='variant-header-secondary px-4 py-2 rounded-md text-2xl'>
+							Participar
+						</Link>
+					</>
+				)
+			}
 
 		</main>
 	)
