@@ -2,11 +2,22 @@
 
 import Link from "next/link"
 import { CardDateInfo, CardPremio, CardFullInfo } from "./cards"
-import { useRaffle } from "@/app/_hooks/raffle"
+import { useRaffle, useRaffleMutation } from "@/app/_hooks/raffle"
+import { Button } from "../ui/button"
+import { authStore } from "@/app/_context/authState"
 
 export const Presentantion = () => {
-
 	const { raffleQueryLatest: { data, isLoading } } = useRaffle();
+	const {participateRaffleMutation} = useRaffleMutation()
+	const {user} = authStore()
+
+
+	const handleClickParticipe = () => {
+		participateRaffleMutation.mutate(data?.id ?? "")
+
+		console.log(participateRaffleMutation.data);
+		console.log(participateRaffleMutation.error?.message);
+	}
 
 	return (
 		<main className="text-blue-dark-app-900 w-11/12 max-w-3xl 
@@ -15,7 +26,7 @@ export const Presentantion = () => {
 				!isLoading && data && (
 					<>
 						<CardPremio
-							premio={data.prize.name}
+							premio={ data.prize.name }
 						/>
 
 						<div className="grid md:grid-cols-2 place-items-center 
@@ -32,15 +43,25 @@ export const Presentantion = () => {
 						</div>
 
 						<CardDateInfo
-							dateStart={ new Date(data.createAt) }
-							dateEnd={ new Date(data.endAt) }
+							dateStart={ new Date( data.createAt ) }
+							dateEnd={ new Date( data.endAt ) }
 						/>
 
-						<Link
-							href="/auth/login"
-							className='variant-header-secondary px-4 py-2 rounded-md text-2xl'>
-							Participar
-						</Link>
+						{
+							!user ? (
+								<Link
+									href="/auth/login"
+									className='variant-header-secondary px-4 py-2 rounded-md text-2xl'>
+									Participar
+								</Link>
+							): (
+								<Button
+								onClick={handleClickParticipe}
+									className='variant-header-secondary text-blue-dark-app-900 px-6 py-6 rounded-md text-2xl'>
+									Participar
+								</Button>
+							)
+						}
 					</>
 				)
 			}

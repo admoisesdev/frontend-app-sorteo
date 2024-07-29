@@ -7,6 +7,7 @@ export interface AuthResponse {
 
 export interface AuthResponseUser {
 	token: string,
+	id: string,
 	username: string
 	role: string[]
 }

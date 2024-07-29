@@ -6,7 +6,7 @@ export interface RaffleEntity {
 	name: 				string
 	prize:				PrizeEntity
 	users: 				UserEntity[]
-	winner: 			UserEntity
+	winner: 			string
 	active: 			boolean
 	description: 	string
 	createAt: 		Date
