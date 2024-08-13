@@ -1,22 +1,13 @@
-"use client";
+import { HeaderShared } from "./_components/shared/header";
+import { Presentantion } from "./_components/home";
 import dynamic from "next/dynamic";
 
-import { useRaffleLatest } from '@/hooks/useRaffleLatest';
-
-import { Header } from "@/components/ui/Header";
-import { Presentacion } from '@/components/ui/Presentacion';
-
-function Home() {
-  const { queryRaffleLatest } = useRaffleLatest();
-
+function Home () {
   return (
     <div className="w-full min-h-screen bg-hero-home bg-cover bg-[50%_50%]">
       <div className="w-full min-h-screen backdrop-blur-sm bg-opacity-40 bg-black">
-        <Header pathLogout="/auth/login" />
-
-        <main className="w-full min-h-[calc(100vh_-_5rem)] pb-4 lg:p-0">
-          <Presentacion raffle={queryRaffleLatest.data as Raffle} />
-        </main>
+        <HeaderShared />
+        <Presentantion />
       </div>
     </div>
   );

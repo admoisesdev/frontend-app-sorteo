@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "default",
+  "style": "new-york",
   "rsc": true,
   "tsx": true,
   "tailwind": {
@@ -11,7 +11,10 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils"
+    "components": "@/app/_components",
+    "utils": "@/app/_lib/utils",
+    "hooks": "@/app/_hooks",
+    "schemas": "@/app/_schemas",
+    "context": "@/app/_context"
   }
 }
