@@ -3,15 +3,15 @@
 import { RaffleItemPrimary } from "@/app/_components/raffles/raffle/RaffleItemPrimary"
 import { WinnersItem } from "@/app/_components/raffles/raffle/WinnersItem"
 import { useRaffle, useRaffleMutation } from "@/app/_hooks/raffle"
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher"
+import { useRouter } from "next/router";
 
-const RafflePage = ({ params }: Params) => {
-
-	const { raffleQueryById } = useRaffle(params.id);
+const RafflePage = () => {
+  const router = useRouter();
+	const { raffleQueryById } = useRaffle(router.query.slug as string);
 	const {selectWinnerRaffleMutation} = useRaffleMutation();
 
 	const onSelectWinner = (userId:string) => {
-		selectWinnerRaffleMutation.mutate({raffleId:params.id,userId})
+		selectWinnerRaffleMutation.mutate({raffleId:router.query.slug as string,userId})
 	}
 
 	return (
