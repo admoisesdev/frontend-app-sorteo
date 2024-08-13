@@ -7,7 +7,7 @@ import { ChevronDownIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 
 import { ProfileMenu } from "./ProfileMenu";
 import { TypographyP } from "../typography";
-import { Formatter } from "@/config/helpers";
+import { Formatter } from '../../../../config/helpers';
 
 interface Props {
   onLogout: () => void 

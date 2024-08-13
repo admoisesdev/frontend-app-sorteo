@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { HeaderLinks, HeaderLogo,HeaderProfile } from "./"
-import { authStore } from "@/app/_context/authState"
+import { authStore } from '../../../../app/_context/authState';
 
 export const HeaderShared = () => {
 	const { user, onLogout } = authStore()

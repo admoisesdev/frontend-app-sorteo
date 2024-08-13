@@ -1,4 +1,4 @@
-import { cn } from "@/app/_lib/utils"
+import { cn } from "../../../_lib/utils"
 
 interface Props {
 	children:React.ReactNode,

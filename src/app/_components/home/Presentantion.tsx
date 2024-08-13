@@ -2,9 +2,9 @@
 
 import Link from "next/link"
 import { CardDateInfo, CardPremio, CardFullInfo } from "./cards"
-import { useRaffle, useRaffleMutation } from "@/app/_hooks/raffle"
+import { useRaffle, useRaffleMutation } from "../../../app/_hooks/raffle"
 import { Button } from "../ui/button"
-import { authStore } from "@/app/_context/authState"
+import { authStore } from '../../../app/_context/authState';
 
 export const Presentantion = () => {
 	const { raffleQueryLatest: { data, isLoading } } = useRaffle();
